@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@std/http/file-server": "jsr:@std/http/file-server"
+  }
+}
