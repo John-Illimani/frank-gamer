@@ -20,27 +20,66 @@ import {
   Flame,
   Crosshair,
   Radio,
+  Plus,
+  Minus,
+  Send,
+  UserPlus,
+  Camera,
+  Home,
+  Gamepad2,
+  Medal,
+  Users as UsersIcon,
+  ClipboardList,
+  Phone,
+  Calendar,
+  MapPin,
+  Crown,
+  Award,
+  Sparkles,
+  Rocket,
+  Dice1,
+  Clock,
+  Coins,
+  Gem,
+  Milestone,
+  Orbit,
+  Music,
+  Video,
+  Globe,
+  Heart,
+  Zap as ZapIcon,
+  Shield as ShieldIcon,
+  Trophy as TrophyIcon,
+  Swords as SwordsIcon,
+  Crown as CrownIcon,
+  Skull,
+  Flame as FlameIcon,
+  Eye,
+  Cloud,
+  Wind,
+  Moon,
+  Sun,
+  Castle,
+  Orbit as OrbitIcon,
+  Sword,
+  Target as TargetIcon,
 } from "lucide-react";
 
 import {
   FaInstagram,
   FaYoutube,
   FaTwitch,
+  FaFacebook,
+  FaTwitter,
+  FaDiscord,
+  FaTiktok,
 } from "react-icons/fa";
 
-import { SiTiktok } from "react-icons/si";
+import { SiKick, SiRumble } from "react-icons/si";
 
-
-
-/* ============================================================
-   TEAM SCORPIO — Página de gamer para Franklin
-   Temática: campo de batalla de Mobile Legends: Bang Bang
-   Stack: React + Tailwind (paleta estándar) + CSS custom para
-   animaciones (glow, escaneo, niebla, partículas, marquesina).
-   ============================================================ */
-
-/* -------------------- DATA -------------------- */
-
+// ============================================================
+// DATA
+// ============================================================
 
 const HERO_MAINS = [
   {
@@ -49,7 +88,7 @@ const HERO_MAINS = [
     role: "Asesino Fantasma",
     accent: "violet",
     tagline: "Golpea desde las sombras antes de que sepan que llegó.",
-    imagen:"/amon.png",
+    imagen: "/amon.png",
     skills: [
       { icon: Zap, label: "Golpe de sombra", desc: "Tres embestidas veloces que rompen formaciones." },
       { icon: Target, label: "Marca fantasma", desc: "Detecta y persigue al objetivo más débil del mapa." },
@@ -62,10 +101,10 @@ const HERO_MAINS = [
     role: "Luchador Cazador",
     accent: "amber",
     tagline: "El peso pesado de Team Scorpio: entra primero, sale último.",
-     imagen:"/lukas.png",
+    imagen: "/lukas.png",
     skills: [
       { icon: Shield, label: "Guardia de acero", desc: "Reduce el daño recibido y aturde al contraatacar." },
-      { icon: Swords, label: "Embate del cazador", desc: "Arrastra enemigos hacia el centro de la pelea." },
+      { icon: Sword, label: "Embate del cazador", desc: "Arrastra enemigos hacia el centro de la pelea." },
       { icon: Flame, label: "Tormenta terrestre (Definitiva)", desc: "Golpe de área que decide peleas de equipo." },
     ],
   },
@@ -75,7 +114,7 @@ const HERO_MAINS = [
     role: "Tiradora",
     accent: "cyan",
     tagline: "Cuando la luna sale, la última flecha ya decidió la partida.",
-     imagen:"/miya.png",
+    imagen: "/miya.png",
     skills: [
       { icon: Target, label: "Sigilo veloz", desc: "Gana velocidad de movimiento y ataque al activarse." },
       { icon: Star, label: "Luz oculta", desc: "Se vuelve invisible por un instante para reposicionarse." },
@@ -94,6 +133,8 @@ const ACCENTS = {
     ring: "ring-violet-400/60",
     glow: "#a78bfa",
     from: "from-violet-500/20",
+    gradient: "from-violet-600 to-purple-700",
+    bgLight: "bg-violet-500/5",
   },
   amber: {
     text: "text-amber-400",
@@ -104,6 +145,8 @@ const ACCENTS = {
     ring: "ring-amber-400/60",
     glow: "#fbbf24",
     from: "from-amber-500/20",
+    gradient: "from-amber-500 to-orange-600",
+    bgLight: "bg-amber-500/5",
   },
   cyan: {
     text: "text-cyan-400",
@@ -114,6 +157,8 @@ const ACCENTS = {
     ring: "ring-cyan-400/60",
     glow: "#22d3ee",
     from: "from-cyan-500/20",
+    gradient: "from-cyan-500 to-blue-600",
+    bgLight: "bg-cyan-500/5",
   },
   red: {
     text: "text-red-400",
@@ -124,6 +169,8 @@ const ACCENTS = {
     ring: "ring-red-400/60",
     glow: "#f87171",
     from: "from-red-500/20",
+    gradient: "from-red-500 to-rose-700",
+    bgLight: "bg-red-500/5",
   },
   emerald: {
     text: "text-emerald-400",
@@ -134,86 +181,42 @@ const ACCENTS = {
     ring: "ring-emerald-400/60",
     glow: "#34d399",
     from: "from-emerald-500/20",
+    gradient: "from-emerald-500 to-teal-600",
+    bgLight: "bg-emerald-500/5",
   },
-};
-
-const TOURNAMENTS = {
-  duo: [
-    {
-      name: "Copa Duelo de Sombras",
-      mode: "Dúo (2 vs 2)",
-      date: "Marzo 2026",
-      prize: "$150",
-      placement: "🥇 1er lugar",
-      status: "completed",
-    },
-    {
-      name: "Duo Rift Clash",
-      mode: "Dúo (2 vs 2)",
-      date: "Agosto 2026",
-      prize: "$200",
-      placement: "Clasificados a semifinal",
-      status: "upcoming",
-    },
-  ],
-  squad: [
-    {
-      name: "Liga Scorpio Regional",
-      mode: "5 vs 5",
-      date: "Junio 2026",
-      prize: "$500",
-      placement: "Semifinalistas",
-      status: "completed",
-    },
-    {
-      name: "MPL Community Clash",
-      mode: "5 vs 5",
-      date: "Septiembre 2026",
-      prize: "$1000",
-      placement: "Fase de grupos",
-      status: "upcoming",
-    },
-  ],
-  others: [
-    {
-      name: "Reto 1 vs 1 Solo Queue",
-      mode: "1 vs 1",
-      date: "Enero 2026",
-      prize: "$50",
-      placement: "🥈 2do lugar",
-      status: "completed",
-    },
-    {
-      name: "Torneo Relámpago Custom",
-      mode: "Battle Royale personalizado",
-      date: "Octubre 2026",
-      prize: "Merch oficial",
-      placement: "Por definir",
-      status: "upcoming",
-    },
-  ],
 };
 
 const ROSTER = [
   { name: "Franklin", role: "Capitán / Oro", accent: "amber", lead: true, logo: "/foto.png" },
-  { name: "Keyti", role: "Jungla", accent: "cyan", lead: false,logo: "/gusion.png" },
-  { name: "Rouse", role: "Línea de EXP", accent: "violet", lead: false,logo: "/xborg.png" },
-  { name: "Teorias Locas", role: "Mago", accent: "red", lead: false,logo: "/odete.png" },
-  { name: "John", role: "Roamer", accent: "emerald", lead: false,logo: "/dirrot.png" },
+  { name: "Keyti", role: "Jungla", accent: "cyan", lead: false, logo: "/gusion.png" },
+  { name: "Rouse", role: "Línea de EXP", accent: "violet", lead: false, logo: "/xborg.png" },
+  { name: "Teorias Locas", role: "Mago", accent: "red", lead: false, logo: "/odete.png" },
+  { name: "John", role: "Roamer", accent: "emerald", lead: false, logo: "/dirrot.png" },
 ];
 
 const NAV_LINKS = [
-  { id: "inicio", label: "Inicio" },
-  { id: "heroes", label: "Héroes" },
-  { id: "torneos", label: "Torneos" },
-  { id: "equipo", label: "Equipo" },
-  { id: "contacto", label: "Contacto" },
+  { id: "inicio", label: "Inicio", icon: Home },
+  { id: "torneos", label: "Torneos", icon: Trophy },
+  { id: "equipo", label: "Equipo", icon: UsersIcon },
 ];
 
-/* Fecha objetivo de la próxima misión/partida — cámbiala cuando quieras */
-const NEXT_MATCH_DATE = new Date("2026-08-15T18:00:00");
+const TOURNAMENT = {
+  name: "Aniversario Franklin Gamer",
+  mode: "5 vs 5",
+  date: "Diciembre 2026",
+  prize: "$1000 + Merch Oficial",
+  placement: "¡Inscríbete ahora!",
+  status: "upcoming",
+  description: "Torneo especial por el aniversario del canal. ¡Premios increíbles y mucha acción!",
+  image: "/tournament.jpg",
+  sponsors: ["Scorpio Gaming", "GamerZone", "Razer", "HyperX"],
+};
 
-/* -------------------- HELPERS -------------------- */
+const NEXT_MATCH_DATE = new Date("2026-12-15T18:00:00");
+
+// ============================================================
+// HELPERS
+// ============================================================
 
 function useCountdown(target) {
   const [remaining, setRemaining] = useState(() => target.getTime() - Date.now());
@@ -238,9 +241,11 @@ function pad(n) {
   return String(n).padStart(2, "0");
 }
 
-/* -------------------- SMALL UI PIECES -------------------- */
+// ============================================================
+// SMALL UI PIECES
+// ============================================================
 
-function HexFrame({ accent = "amber", size = "md", children, className = "" }) {
+function HexFrame({ accent = "amber", size = "md", children, className = "", animated = false }) {
   const sizes = {
     sm: "w-14 h-14",
     md: "w-24 h-24",
@@ -250,17 +255,15 @@ function HexFrame({ accent = "amber", size = "md", children, className = "" }) {
   const a = ACCENTS[accent];
   return (
     <div
-      className={`relative ${sizes[size]} ${className} flex items-center justify-center`}
+      className={`relative ${sizes[size]} ${className} flex items-center justify-center ${animated ? "animate-float" : ""}`}
       style={{
-        clipPath:
-          "polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%)",
+        clipPath: "polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%)",
       }}
     >
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${a.from} to-zinc-900 border-2 ${a.borderStrong}`}
+        className={`absolute inset-0 bg-gradient-to-br ${a.from} to-zinc-800 border-2 ${a.borderStrong}`}
         style={{
-          clipPath:
-            "polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%)",
+          clipPath: "polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%)",
         }}
       />
       <div className="relative z-10 flex items-center justify-center w-full h-full">
@@ -276,10 +279,9 @@ function StatusPill({ status }) {
     <span
       className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold tracking-wider uppercase border ${
         isDone
-          ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-400"
-          : "bg-amber-500/10 border-amber-500/40 text-amber-400 glow-pulse"
+          ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400"
+          : "bg-amber-500/20 border-amber-500/40 text-amber-400 glow-pulse"
       }`}
-      style={!isDone ? { "--glow-color": "#fbbf24" } : undefined}
     >
       <span
         className={`w-1.5 h-1.5 rounded-full ${
@@ -291,30 +293,915 @@ function StatusPill({ status }) {
   );
 }
 
-function SectionEyebrow({ children, accent = "amber" }) {
+function SectionEyebrow({ children, accent = "amber", icon: Icon = Trophy }) {
   const a = ACCENTS[accent];
   return (
     <div className={`flex items-center gap-3 mb-3 justify-center`}>
       <span className={`h-px w-8 ${a.bg}`} />
+      <Icon className={`w-4 h-4 ${a.text}`} />
       <span
         className={`text-xs sm:text-sm font-bold tracking-[0.3em] uppercase ${a.text}`}
         style={{ fontFamily: "'Rajdhani', sans-serif" }}
       >
         {children}
       </span>
+      <Icon className={`w-4 h-4 ${a.text}`} />
       <span className={`h-px w-8 ${a.bg}`} />
     </div>
   );
 }
 
-/* -------------------- MAIN COMPONENT -------------------- */
+function GlowButton({ children, accent = "amber", onClick, className = "", disabled = false, type = "button" }) {
+  const a = ACCENTS[accent];
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={`relative inline-flex items-center justify-center gap-2 px-6 py-3 font-bold uppercase tracking-wider transition-all duration-300 group hover:scale-105 active:scale-95 ${className}`}
+      style={{
+        clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)",
+      }}
+    >
+      <span className={`absolute inset-0 bg-gradient-to-r ${a.gradient} opacity-90 group-hover:opacity-100 transition-opacity`} />
+      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{
+        boxShadow: `0 0 30px ${a.glow}, 0 0 60px ${a.glow}33`,
+      }} />
+      <span className="relative z-10 flex items-center gap-2 text-zinc-950">
+        {children}
+      </span>
+    </button>
+  );
+}
+
+function SectionTitle({ children, subtitle = "", accent = "amber" }) {
+  const a = ACCENTS[accent];
+  return (
+    <div className="text-center">
+      <h2
+        className={`text-4xl sm:text-6xl font-black bg-gradient-to-r ${a.gradient} bg-clip-text text-transparent`}
+        style={{ fontFamily: "'Orbitron', sans-serif" }}
+      >
+        {children}
+      </h2>
+      {subtitle && (
+        <p className={`mt-3 text-zinc-300 max-w-xl mx-auto text-sm sm:text-base`}>
+          {subtitle}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// REGISTRATION FORM COMPONENT (Modal)
+// ============================================================
+
+function RegistrationModal({ isOpen, onClose, onSuccess }) {
+  const [formData, setFormData] = useState({
+    accion: "crear",
+    cel_lider: "",
+    nombre_team: "",
+    logo_base64: "",
+    integrantes: [{ id_jugador: "", nombre: "" }]
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+  const [selectedCount, setSelectedCount] = useState(1);
+  const fileInputRef = useRef(null);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const API_URL = "https://script.google.com/macros/s/AKfycbw225jZc-RpDV9hCjDSf1s1ujx4At5mHl3J5erq_gNnw3RJagYPs7w3xtk245pigeGwdw/exec";
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleMemberChange = (index, field, value) => {
+    const newIntegrantes = [...formData.integrantes];
+    newIntegrantes[index][field] = value;
+    setFormData(prev => ({ ...prev, integrantes: newIntegrantes }));
+  };
+
+  const addMember = () => {
+    setFormData(prev => ({
+      ...prev,
+      integrantes: [...prev.integrantes, { id_jugador: "", nombre: "" }]
+    }));
+  };
+
+  const removeMember = (index) => {
+    if (formData.integrantes.length <= 1) return;
+    const newIntegrantes = formData.integrantes.filter((_, i) => i !== index);
+    setFormData(prev => ({ ...prev, integrantes: newIntegrantes }));
+  };
+
+  const handleSetMemberCount = (count) => {
+    setSelectedCount(count);
+    const currentCount = formData.integrantes.length;
+    if (count > currentCount) {
+      const newMembers = Array(count - currentCount).fill({ id_jugador: "", nombre: "" });
+      setFormData(prev => ({
+        ...prev,
+        integrantes: [...prev.integrantes, ...newMembers]
+      }));
+    } else if (count < currentCount) {
+      setFormData(prev => ({
+        ...prev,
+        integrantes: prev.integrantes.slice(0, count)
+      }));
+    }
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setFormData(prev => ({ ...prev, logo_base64: base64String }));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      await fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      setSuccess(true);
+      setFormData({
+        accion: "crear",
+        cel_lider: "",
+        nombre_team: "",
+        logo_base64: "",
+        integrantes: [{ id_jugador: "", nombre: "" }]
+      });
+      setSelectedCount(1);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      
+      setTimeout(() => {
+        handleClose();
+        if (onSuccess) onSuccess();
+      }, 2000);
+    } catch (err) {
+      setError("Error al enviar el formulario. Intenta de nuevo.");
+      console.error("Error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      onClose();
+    }, 500);
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div 
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl transition-all duration-700 ${
+        isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+      }`}
+      onClick={handleClose}
+    >
+      <div 
+        className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-modal-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 to-zinc-900/95 p-6 sm:p-8 overflow-hidden shadow-2xl shadow-emerald-500/10">
+          <div className="absolute inset-0 opacity-5 hex-pattern" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 blur-2xl opacity-30 animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-cyan-500/5" />
+          
+          <button
+            onClick={handleClose}
+            className="absolute top-4 right-4 z-20 text-zinc-400 hover:text-zinc-200 transition-all hover:rotate-90 duration-300 p-2 hover:bg-zinc-800/50 rounded-full"
+          >
+            <X size={24} />
+          </button>
+
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 flex items-center justify-center animate-pulse">
+                <Trophy size={24} className="text-zinc-950" />
+              </div>
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-black text-zinc-100" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                  ¡Inscríbete al Torneo!
+                </h3>
+                <p className="text-emerald-400 text-sm">Aniversario Franklin Gamer</p>
+              </div>
+            </div>
+            <p className="text-zinc-400 text-sm mt-2">Completa los datos para registrar tu equipo en el torneo</p>
+
+            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+              <input type="hidden" name="accion" value="crear" />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-zinc-300 uppercase tracking-wider mb-1">
+                    <Phone className="inline w-4 h-4 mr-1" /> Celular del Líder *
+                  </label>
+                  <input
+                    type="text"
+                    name="cel_lider"
+                    value={formData.cel_lider}
+                    onChange={handleInputChange}
+                    placeholder="Ej: 77777777"
+                    required
+                    className="w-full bg-zinc-900/80 border border-zinc-700 focus:border-emerald-500 outline-none transition-colors px-4 py-3 text-zinc-100 rounded-lg"
+                    style={{ fontFamily: "'Share Tech Mono', monospace" }}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-zinc-300 uppercase tracking-wider mb-1">
+                    <Users className="inline w-4 h-4 mr-1" /> Nombre del Team *
+                  </label>
+                  <input
+                    type="text"
+                    name="nombre_team"
+                    value={formData.nombre_team}
+                    onChange={handleInputChange}
+                    placeholder="Ej: Shohoku"
+                    required
+                    className="w-full bg-zinc-900/80 border border-zinc-700 focus:border-emerald-500 outline-none transition-colors px-4 py-3 text-zinc-100 rounded-lg"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-zinc-300 uppercase tracking-wider mb-1">
+                  <Camera className="inline w-4 h-4 mr-1" /> Logo del Equipo
+                </label>
+                <div className="flex items-center gap-4 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 transition-colors rounded-lg flex items-center gap-2"
+                  >
+                    <Camera size={18} />
+                    Subir logo
+                  </button>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileUpload}
+                    accept="image/*"
+                    className="hidden"
+                  />
+                  {formData.logo_base64 && (
+                    <span className="text-emerald-400 text-sm flex items-center gap-1 animate-fade-in">
+                      <Check size={16} /> Logo cargado
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-zinc-300 uppercase tracking-wider mb-1">
+                  <Users className="inline w-4 h-4 mr-1" /> Cantidad de Integrantes
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {[1, 2, 3, 4, 5].map(num => (
+                    <button
+                      key={num}
+                      type="button"
+                      onClick={() => handleSetMemberCount(num)}
+                      className={`px-4 py-2 border transition-all duration-300 rounded-lg ${
+                        selectedCount === num
+                          ? "bg-emerald-500 border-emerald-500 text-zinc-950 scale-105 shadow-lg shadow-emerald-500/20"
+                          : "bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-emerald-500/50 hover:text-zinc-200"
+                      }`}
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-zinc-300 uppercase tracking-wider mb-2">
+                  <Users className="inline w-4 h-4 mr-1" /> Integrantes *
+                </label>
+                <div className="space-y-3 max-h-60 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-emerald-500/20">
+                  {formData.integrantes.map((member, index) => (
+                    <div key={index} className="flex items-center gap-3 animate-slide-in" style={{ animationDelay: `${index * 50}ms` }}>
+                      <div className="flex-1 grid grid-cols-2 gap-2">
+                        <input
+                          type="text"
+                          value={member.id_jugador}
+                          onChange={(e) => handleMemberChange(index, "id_jugador", e.target.value)}
+                          placeholder="ID Jugador"
+                          required
+                          className="bg-zinc-900/80 border border-zinc-700 focus:border-emerald-500 outline-none transition-colors px-3 py-2 text-zinc-100 text-sm rounded-lg"
+                        />
+                        <input
+                          type="text"
+                          value={member.nombre}
+                          onChange={(e) => handleMemberChange(index, "nombre", e.target.value)}
+                          placeholder="Nombre"
+                          required
+                          className="bg-zinc-900/80 border border-zinc-700 focus:border-emerald-500 outline-none transition-colors px-3 py-2 text-zinc-100 text-sm rounded-lg"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeMember(index)}
+                        className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors rounded-lg"
+                        disabled={formData.integrantes.length <= 1}
+                      >
+                        <Minus size={18} />
+                      </button>
+                      {index === formData.integrantes.length - 1 && (
+                        <button
+                          type="button"
+                          onClick={addMember}
+                          className="p-2 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 transition-colors rounded-lg"
+                        >
+                          <Plus size={18} />
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <GlowButton
+                type="submit"
+                accent="emerald"
+                disabled={loading}
+                className="w-full"
+              >
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
+                    Enviando...
+                  </div>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    Registrar Equipo
+                  </>
+                )}
+              </GlowButton>
+
+              {success && (
+                <div className="p-4 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-center animate-fade-in rounded-lg">
+                  <Check className="inline w-5 h-5 mr-2" />
+                  ¡Equipo registrado exitosamente!
+                </div>
+              )}
+              {error && (
+                <div className="p-4 bg-red-500/20 border border-red-500/40 text-red-400 text-center animate-fade-in rounded-lg">
+                  <X className="inline w-5 h-5 mr-2" />
+                  {error}
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// REDES SOCIALES MODAL
+// ============================================================
+
+function SocialModal({ isOpen, onClose }) {
+  if (!isOpen) return null;
+
+  const socialLinks = [
+    { name: "Instagram", icon: FaInstagram, url: "https://instagram.com/teamscorpio", color: "text-pink-500" },
+    { name: "YouTube", icon: FaYoutube, url: "https://youtube.com/@teamscorpio", color: "text-red-500" },
+    { name: "TikTok", icon: FaTiktok, url: "https://www.tiktok.com/@juanfranklin444", color: "text-white" },
+    { name: "Twitch", icon: FaTwitch, url: "https://twitch.tv/teamscorpio", color: "text-purple-500" },
+    { name: "Discord", icon: FaDiscord, url: "https://discord.gg/teamscorpio", color: "text-indigo-400" },
+    { name: "Facebook", icon: FaFacebook, url: "https://facebook.com/teamscorpio", color: "text-blue-500" },
+  ];
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fade-in" onClick={onClose}>
+      <div 
+        className="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-amber-500/30 max-w-md w-full p-6 animate-scale-in shadow-2xl shadow-amber-500/10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="absolute inset-0 opacity-5 hex-pattern" />
+        <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-orange-500/20 blur-2xl opacity-20" />
+        
+        <div className="relative">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-black text-zinc-100 flex items-center gap-2" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+              <Star className="text-amber-400 animate-spin-slow" size={20} />
+              Redes de Franklin
+            </h3>
+            <button onClick={onClose} className="text-zinc-400 hover:text-zinc-200 transition-colors p-1 hover:bg-zinc-800 rounded">
+              <X size={24} />
+            </button>
+          </div>
+          <div className="space-y-3">
+            {socialLinks.map((social, index) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-3 border border-zinc-800 hover:border-amber-500/50 transition-all duration-300 group hover:bg-zinc-800/50 hover:translate-x-1 rounded-lg"
+                style={{ animationDelay: `${index * 80}ms` }}
+              >
+                <social.icon size={24} className={`${social.color} group-hover:scale-110 transition-transform`} />
+                <span className="text-zinc-300 font-bold group-hover:text-amber-400 transition-colors">
+                  {social.name}
+                </span>
+                <ChevronRight size={16} className="ml-auto text-zinc-600 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// SECTION COMPONENTS
+// ============================================================
+
+function useParallaxMouse(strength = 1) {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMove = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * strength;
+      const y = (e.clientY / window.innerHeight - 0.5) * strength;
+      setPos({ x, y });
+    };
+    window.addEventListener("mousemove", handleMove);
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, [strength]);
+
+  return pos;
+}
+
+function useScrollParallax() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return scrollY;
+}
+
+function ParallaxBackground({ children, className = "" }) {
+  const mouse = useParallaxMouse(20);
+  const scrollY = useScrollParallax();
+
+  return (
+    <div
+      className={`absolute inset-0 z-0 transition-transform duration-300 ease-out bg-cover bg-center bg-no-repeat ${className}`}
+      style={{
+        transform: `translate3d(${mouse.x * 0.2}px, ${mouse.y * 0.2 + scrollY * 0.1}px, 0)`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function InicioSection({ particles, onFollowClick, following }) {
+  const sectionRef = useRef(null);
+  const mouse = useParallaxMouse(30);
+  const scrollY = useScrollParallax();
+
+  const scrollFade = Math.max(0, 1 - scrollY / 600);
+  const scrollTranslate = scrollY * 0.35;
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <ParallaxBackground className="bg-[url('/6.jpg')]">
+        <BattlefieldBackground particles={particles} />
+      </ParallaxBackground>
+
+      <div
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 40%, transparent 0%, rgba(0,0,0,0.4) 85%)",
+          opacity: scrollFade,
+        }}
+      />
+
+      <div
+        className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 text-center transition-transform duration-150 ease-out"
+        style={{
+          opacity: scrollFade,
+          transform: `translate3d(${mouse.x * 0.6}px, ${mouse.y * 0.6 - scrollTranslate}px, 0)`,
+        }}
+      >
+        <div className="fade-up" style={{ animationDelay: "0.05s" }}>
+          <SectionEyebrow accent="amber" icon={Crown}>
+            Team Scorpio • Jungla
+          </SectionEyebrow>
+        </div>
+
+        <h1
+          className="fade-up text-6xl sm:text-8xl font-black tracking-tight text-zinc-50 leading-none relative"
+          style={{ fontFamily: "'Orbitron', sans-serif", animationDelay: "0.15s" }}
+        >
+          <span
+            className="absolute inset-0 blur-2xl opacity-40 animate-pulse"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(251,191,36,0.5) 0%, transparent 70%)",
+            }}
+            aria-hidden="true"
+          />
+          <span className="relative">FRANKLIN</span>
+          <span className="block text-2xl sm:text-3xl text-amber-400 mt-2 relative">
+            El Aguijón Dorado
+          </span>
+        </h1>
+
+        <p
+          className="fade-up mt-4 text-base sm:text-xl text-zinc-300 max-w-xl mx-auto"
+          style={{ animationDelay: "0.28s" }}
+        >
+          El aguijón que decide la partida. Rango Mítico, mente fría,
+          iniciativas que rompen líneas enemigas.
+        </p>
+
+        <div
+          className="fade-up mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
+          style={{ animationDelay: "0.4s" }}
+        >
+          <GlowButton
+            accent="amber"
+            onClick={() =>
+              document.getElementById("torneos")?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            <Trophy size={18} /> Ver Torneos
+          </GlowButton>
+
+          <button
+            onClick={onFollowClick}
+            className={`relative inline-flex items-center justify-center gap-2 font-bold px-7 py-3 tracking-wide border-2 transition-all duration-300 hover:scale-105 active:scale-95 rounded-lg ${
+              following
+                ? "bg-zinc-100 text-zinc-950 border-zinc-100"
+                : "bg-transparent text-zinc-100 border-zinc-100 hover:bg-zinc-100 hover:text-zinc-950"
+            }`}
+          >
+            {following ? <Check size={18} /> : <Star size={18} />}
+            {following ? "Siguiendo" : "Seguir"}
+          </button>
+        </div>
+
+        <div
+          className="fade-up mt-10 flex flex-wrap items-center justify-center gap-3"
+          style={{ animationDelay: "0.55s" }}
+        >
+          {[
+            { label: "Rango", value: "Mítico", accent: "amber" },
+            { label: "Win rate", value: "68%", accent: "cyan" },
+            { label: "KDA", value: "7.2", accent: "violet" },
+            { label: "Racha", value: "12V", accent: "red" },
+          ].map((s, i) => (
+            <div
+              key={s.label}
+              className={`fade-up px-4 py-2 border ${ACCENTS[s.accent].border} bg-zinc-900/50 backdrop-blur-sm hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default rounded-lg`}
+              style={{
+                animationDelay: `${0.65 + i * 0.08}s`,
+              }}
+            >
+              <p className="text-[10px] uppercase tracking-widest text-zinc-500">
+                {s.label}
+              </p>
+              <p
+                className={`text-lg font-bold ${ACCENTS[s.accent].text}`}
+                style={{ fontFamily: "'Share Tech Mono', monospace" }}
+              >
+                {s.value}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="hidden lg:block absolute right-8 bottom-10 z-20 opacity-90 transition-transform duration-150 ease-out"
+        style={{
+          transform: `translate3d(${mouse.x * 1.2}px, ${mouse.y * 1.2}px, 0)`,
+        }}
+      >
+        <MiniRadar />
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 z-20">
+        <TickerBar />
+      </div>
+
+      <div
+        className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 animate-bounce"
+        style={{ opacity: scrollFade }}
+      >
+        <span className="text-[10px] uppercase tracking-widest text-zinc-500">
+          Scroll
+        </span>
+        <div className="w-px h-6 bg-gradient-to-b from-amber-400 to-transparent" />
+      </div>
+    </section>
+  );
+}
+
+function HeroesSection({ openHero, setOpenHero }) {
+  return (
+    <section id="heroes" className="relative py-24 bg-zinc-900/50 border-t border-zinc-800/50">
+      <div className="absolute inset-0 opacity-[0.03] hex-pattern" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <SectionEyebrow accent="cyan" icon={SwordsIcon}>Pool de héroes</SectionEyebrow>
+        <SectionTitle accent="cyan" subtitle="Toca una carta para ver las habilidades que Franklin domina con cada campeón.">
+          Héroes de guerra
+        </SectionTitle>
+
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {HERO_MAINS.map((hero) => {
+            const a = ACCENTS[hero.accent];
+            const isOpen = openHero === hero.id;
+            return (
+              <div
+                key={hero.id}
+                className={`relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 p-6 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-${hero.accent}-500/10 cursor-pointer group rounded-2xl`}
+                onClick={() => setOpenHero(isOpen ? null : hero.id)}
+              >
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-transparent to-current pointer-events-none rounded-2xl" style={{ color: a.glow }} />
+                
+                <HexFrame accent={hero.accent} size="lg" className="mb-4 animate-float">
+                  <img src={hero.imagen} alt={hero.name} className="w-full h-full object-cover rounded-full" />
+                </HexFrame>
+
+                <h3
+                  className={`text-2xl font-black ${a.text}`}
+                  style={{ fontFamily: "'Orbitron', sans-serif" }}
+                >
+                  {hero.name}
+                </h3>
+                <p className="text-xs uppercase tracking-widest text-zinc-500 mt-1">
+                  {hero.role}
+                </p>
+                <p className="text-sm text-zinc-400 mt-3">{hero.tagline}</p>
+
+                <button
+                  className={`mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-4 py-2 border ${a.border} ${a.text} hover:${a.bgSoft} transition-colors rounded-lg`}
+                >
+                  {isOpen ? "Ocultar habilidades" : "Ver habilidades"}
+                  <ChevronRight
+                    size={14}
+                    className={`transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
+                  />
+                </button>
+
+                <div
+                  className={`grid w-full transition-all duration-500 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100 mt-5" : "grid-rows-[0fr] opacity-0 mt-0"
+                  }`}
+                  style={{ display: "grid" }}
+                >
+                  <div className="overflow-hidden">
+                    <div className="flex flex-col gap-3 text-left">
+                      {hero.skills.map((skill) => (
+                        <div key={skill.label} className="flex items-start gap-3 group/skill">
+                          <div className={`mt-0.5 shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${a.bgSoft} ${a.text} group-hover/skill:scale-110 transition-transform`}>
+                            <skill.icon size={16} />
+                          </div>
+                          <div>
+                            <p className="text-sm font-bold text-zinc-200">
+                              {skill.label}
+                            </p>
+                            <p className="text-xs text-zinc-500">{skill.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TorneosSection({ countdown, onRegisterClick }) {
+  const scrollToRegistro = () => {
+    document.getElementById("torneos")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <section id="torneos" className="relative py-24 bg-zinc-900/50 border-t border-zinc-800/50 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.06] hex-pattern" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-500/5 to-transparent" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+        <SectionEyebrow accent="red" icon={Award}>Historial de combate</SectionEyebrow>
+        <SectionTitle accent="red" subtitle="Torneo especial por el aniversario de Franklin Gamer">
+          Torneo Aniversario
+        </SectionTitle>
+
+        <div className="mt-10 max-w-2xl mx-auto border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-zinc-900/90 px-6 py-8 text-center relative overflow-hidden rounded-2xl">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-transparent to-amber-500/20 animate-pulse" />
+          </div>
+          
+          <p className="text-xs uppercase tracking-[0.3em] text-amber-400 font-bold flex items-center justify-center gap-2">
+            <Radio size={14} className="animate-pulse" /> Próxima misión
+          </p>
+          
+          {countdown.over ? (
+            <p className="mt-3 text-zinc-300 font-bold text-xl">
+              ¡La partida está en curso ahora mismo!
+            </p>
+          ) : (
+            <div className="mt-4 flex items-center justify-center gap-2 sm:gap-4">
+              {[
+                { v: countdown.days, l: "Días" },
+                { v: countdown.hours, l: "Hrs" },
+                { v: countdown.minutes, l: "Min" },
+                { v: countdown.seconds, l: "Seg" },
+              ].map((t) => (
+                <div
+                  key={t.l}
+                  className="bg-zinc-950/80 border border-amber-500/30 px-3 sm:px-4 py-2 min-w-[64px] hover:scale-105 transition-transform rounded-lg"
+                >
+                  <p
+                    className="text-2xl sm:text-3xl font-black text-amber-400"
+                    style={{ fontFamily: "'Share Tech Mono', monospace" }}
+                  >
+                    {pad(t.v)}
+                  </p>
+                  <p className="text-[10px] uppercase tracking-widest text-zinc-500">
+                    {t.l}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="mt-12 border border-red-500/30 bg-gradient-to-br from-red-500/10 to-zinc-900/90 p-6 sm:p-8 hover:border-red-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-red-500/10 rounded-2xl">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex-1">
+              <p className="text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+                <Crown className="w-4 h-4 text-red-400" />
+                Torneo Especial
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-black text-zinc-100 mt-1 flex items-center gap-3">
+                {TOURNAMENT.name}
+                <Sparkles className="w-6 h-6 text-amber-400 animate-pulse" />
+              </h3>
+              <p className="text-zinc-400 mt-2">{TOURNAMENT.description}</p>
+              
+              <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                <div className="bg-zinc-900/50 p-3 border border-zinc-800 rounded-lg">
+                  <p className="text-[10px] uppercase tracking-widest text-zinc-500">Modalidad</p>
+                  <p className="text-sm font-bold text-zinc-200 mt-0.5">
+                    <Users className="inline w-4 h-4 mr-1 text-red-400" />
+                    {TOURNAMENT.mode}
+                  </p>
+                </div>
+                <div className="bg-zinc-900/50 p-3 border border-zinc-800 rounded-lg">
+                  <p className="text-[10px] uppercase tracking-widest text-zinc-500">Fecha</p>
+                  <p className="text-sm font-bold text-zinc-200 mt-0.5">
+                    <Calendar className="inline w-4 h-4 mr-1 text-amber-400" />
+                    {TOURNAMENT.date}
+                  </p>
+                </div>
+                <div className="bg-zinc-900/50 p-3 border border-zinc-800 rounded-lg">
+                  <p className="text-[10px] uppercase tracking-widest text-zinc-500">Premio</p>
+                  <p className="text-sm font-bold text-amber-400 mt-0.5">
+                    <Coins className="inline w-4 h-4 mr-1" />
+                    {TOURNAMENT.prize}
+                  </p>
+                </div>
+                <div className="bg-zinc-900/50 p-3 border border-zinc-800 rounded-lg">
+                  <p className="text-[10px] uppercase tracking-widest text-zinc-500">Estado</p>
+                  <StatusPill status={TOURNAMENT.status} />
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-2 w-full md:w-auto">
+              <GlowButton accent="red" onClick={onRegisterClick} className="w-full">
+                <Rocket size={18} />
+                Inscribirse
+              </GlowButton>
+              <button className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
+                <Copy className="inline w-3 h-3 mr-1" />
+                Compartir torneo
+              </button>
+            </div>
+          </div>
+          
+          <div className="mt-6 pt-6 border-t border-zinc-800/50">
+            <p className="text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+              <Gem className="w-4 h-4 text-amber-400" />
+              Patrocinadores
+            </p>
+            <div className="flex flex-wrap gap-4 mt-2">
+              {TOURNAMENT.sponsors.map((sponsor) => (
+                <span key={sponsor} className="text-sm text-zinc-400 bg-zinc-900/50 px-3 py-1 border border-zinc-800 rounded-lg">
+                  {sponsor}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EquipoSection() {
+  return (
+    <section id="equipo" className="relative py-24 bg-zinc-900/50 border-t border-zinc-800/50">
+      <div className="absolute inset-0 opacity-[0.03] hex-pattern" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <SectionEyebrow accent="violet" icon={ShieldIcon}>La colmena</SectionEyebrow>
+        <SectionTitle accent="violet" subtitle="El equipo que domina el campo de batalla">
+          Escuadrón Scorpio
+        </SectionTitle>
+
+        <div className="mt-14 grid grid-cols-2 sm:grid-cols-5 gap-5">
+          {ROSTER.map((m, index) => {
+            const a = ACCENTS[m.accent];
+            return (
+              <div
+                key={m.name + m.role}
+                className={`flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 ${
+                  m.lead ? "col-span-2 sm:col-span-1" : ""
+                }`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <HexFrame accent={m.accent} size={m.lead ? "xl" : "md"} className="mb-3 animate-float">
+                  <img src={m.logo} alt={m.name} className="w-full h-full object-cover rounded-full" />
+                </HexFrame>
+                <p className={`font-black ${m.lead ? "text-xl" : "text-sm"} text-zinc-100`}>
+                  {m.name}
+                  {m.lead && <Crown className="inline w-4 h-4 ml-1 text-amber-400" />}
+                </p>
+                <p className={`text-[11px] uppercase tracking-widest ${a.text}`}>
+                  {m.role}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// MAIN COMPONENT
+// ============================================================
 
 export default function TeamScorpioFranklin() {
+  const [currentSection, setCurrentSection] = useState("inicio");
   const [menuOpen, setMenuOpen] = useState(false);
   const [following, setFollowing] = useState(false);
-  const [activeTab, setActiveTab] = useState("duo");
+  const [showSocialModal, setShowSocialModal] = useState(false);
   const [openHero, setOpenHero] = useState(null);
   const [copiedKey, setCopiedKey] = useState(null);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [volume, setVolume] = useState(0.6);
@@ -325,10 +1212,12 @@ export default function TeamScorpioFranklin() {
 
   const particles = useMemo(
     () =>
-      Array.from({ length: 16 }).map((_, i) => ({
+      Array.from({ length: 30 }).map((_, i) => ({
         left: (i * 37) % 100,
         delay: (i * 1.3) % 10,
         duration: 10 + ((i * 7) % 8),
+        size: 1 + (i % 3),
+        opacity: 0.3 + (i % 7) / 10,
       })),
     []
   );
@@ -339,10 +1228,13 @@ export default function TeamScorpioFranklin() {
     }
   }, [volume, muted]);
 
-  const scrollTo = (id) => {
+  const navigateTo = (section) => {
     setMenuOpen(false);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    setCurrentSection(section);
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const toggleAudio = () => {
@@ -369,24 +1261,45 @@ export default function TeamScorpioFranklin() {
     }
   };
 
+  const handleFollowClick = () => {
+    setFollowing(!following);
+    setShowSocialModal(true);
+  };
+
+  const renderSection = () => {
+    switch (currentSection) {
+      case "inicio":
+        return <InicioSection particles={particles} onFollowClick={handleFollowClick} following={following} />;
+      case "torneos":
+        return <TorneosSection countdown={countdown} onRegisterClick={() => setShowRegisterModal(true)} />;
+      case "equipo":
+        return <EquipoSection />;
+      default:
+        return <InicioSection particles={particles} onFollowClick={handleFollowClick} following={following} />;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 overflow-x-hidden" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+    <div className="min-h-screen bg-zinc-900 text-zinc-100 overflow-x-hidden" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
       <GlobalStyle />
+      <SocialModal isOpen={showSocialModal} onClose={() => setShowSocialModal(false)} />
+      <RegistrationModal 
+        isOpen={showRegisterModal} 
+        onClose={() => setShowRegisterModal(false)}
+        onSuccess={() => {
+          // Puedes agregar acciones adicionales aquí cuando el registro sea exitoso
+        }}
+      />
 
       {/* ================= NAVBAR ================= */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-zinc-950/80 border-b border-zinc-800">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-zinc-900/90 border-b border-zinc-800/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <button
-            onClick={() => scrollTo("inicio")}
+            onClick={() => navigateTo("inicio")}
             className="flex items-center gap-2.5 group"
           >
-            <HexFrame accent="amber" size="sm">
-              <span
-                className="text-amber-400 font-black text-lg"
-                style={{ fontFamily: "'Orbitron', sans-serif" }}
-              >
-                <img src="/foto.png" alt="Logo" />
-              </span>
+            <HexFrame accent="amber" size="sm" animated>
+              <img src="/foto.png" alt="Logo" className="w-full h-full object-cover rounded-full" />
             </HexFrame>
             <div className="text-left leading-tight">
               <p
@@ -401,13 +1314,18 @@ export default function TeamScorpioFranklin() {
             </div>
           </button>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className="text-sm font-semibold tracking-wide text-zinc-400 hover:text-amber-400 transition-colors uppercase"
+                onClick={() => navigateTo(link.id)}
+                className={`text-sm font-semibold tracking-wide uppercase transition-all duration-300 flex items-center gap-1.5 ${
+                  currentSection === link.id
+                    ? "text-amber-400 scale-105"
+                    : "text-zinc-400 hover:text-amber-400 hover:scale-105"
+                }`}
               >
+                <link.icon size={16} />
                 {link.label}
               </button>
             ))}
@@ -423,13 +1341,18 @@ export default function TeamScorpioFranklin() {
         </div>
 
         {menuOpen && (
-          <div className="md:hidden border-t border-zinc-800 bg-zinc-950/95 px-4 py-3 flex flex-col gap-1">
+          <div className="md:hidden border-t border-zinc-800/50 bg-zinc-900/95 px-4 py-3 flex flex-col gap-1 backdrop-blur-xl">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className="text-left px-2 py-3 text-sm font-semibold tracking-wide text-zinc-300 hover:text-amber-400 uppercase border-b border-zinc-900 last:border-none"
+                onClick={() => navigateTo(link.id)}
+                className={`text-left px-2 py-3 text-sm font-semibold tracking-wide uppercase border-b border-zinc-900/50 last:border-none transition-all flex items-center gap-2 ${
+                  currentSection === link.id
+                    ? "text-amber-400"
+                    : "text-zinc-300 hover:text-amber-400"
+                }`}
               >
+                <link.icon size={16} />
                 {link.label}
               </button>
             ))}
@@ -437,422 +1360,29 @@ export default function TeamScorpioFranklin() {
         )}
       </header>
 
-      {/* ================= HERO ================= */}
-      <section
-        id="inicio"
-        className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
-      >
-        <BattlefieldBackground particles={particles} />
-
-        <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <div className="fade-up" style={{ animationDelay: "0.05s" }}>
-            <SectionEyebrow accent="amber">Team Scorpio • Jungla</SectionEyebrow>
-          </div>
-
-          <h1
-            className="fade-up text-6xl sm:text-8xl font-black tracking-tight text-zinc-50 leading-none"
-            style={{ fontFamily: "'Orbitron', sans-serif", animationDelay: "0.15s" }}
-          >
-            FRANKLIN
-          </h1>
-
-          <p
-            className="fade-up mt-4 text-base sm:text-xl text-zinc-400 max-w-xl mx-auto"
-            style={{ animationDelay: "0.28s" }}
-          >
-            El aguijón que decide la partida. Rango Mítico, mente fría,
-            iniciativas que rompen líneas enemigas.
-          </p>
-
-          <div
-            className="fade-up mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
-            style={{ animationDelay: "0.4s" }}
-          >
-            <button
-              onClick={() => scrollTo("torneos")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold px-7 py-3 tracking-wide transition-colors"
-              style={{
-                clipPath:
-                  "polygon(6% 0, 100% 0, 94% 100%, 0 100%)",
-              }}
-            >
-              <Trophy size={18} /> Ver torneos
-            </button>
-
-            <button
-              onClick={() => setFollowing((v) => !v)}
-              className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 font-bold px-7 py-3 tracking-wide border-2 transition-colors ${
-                following
-                  ? "bg-zinc-100 text-zinc-950 border-zinc-100"
-                  : "bg-transparent text-zinc-100 border-zinc-100 hover:bg-zinc-100 hover:text-zinc-950"
-              }`}
-              style={{ clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)" }}
-            >
-              {following ? <Check size={18} /> : <Star size={18} />}
-              {following ? "Siguiendo" : "Seguir"}
-            </button>
-          </div>
-
-          {/* Stat chips */}
-          <div
-            className="fade-up mt-10 flex flex-wrap items-center justify-center gap-3"
-            style={{ animationDelay: "0.55s" }}
-          >
-            {[
-              { label: "Rango", value: "Mítico", accent: "amber" },
-              { label: "Win rate", value: "68%", accent: "cyan" },
-              { label: "KDA", value: "7.2", accent: "violet" },
-              { label: "Racha", value: "12V", accent: "red" },
-            ].map((s) => (
-              <div
-                key={s.label}
-                className={`px-4 py-2 border ${ACCENTS[s.accent].border} bg-zinc-900/70 backdrop-blur-sm`}
-                style={{ clipPath: "polygon(10% 0, 100% 0, 90% 100%, 0 100%)" }}
-              >
-                <p className="text-[10px] uppercase tracking-widest text-zinc-500">
-                  {s.label}
-                </p>
-                <p
-                  className={`text-lg font-bold ${ACCENTS[s.accent].text}`}
-                  style={{ fontFamily: "'Share Tech Mono', monospace" }}
-                >
-                  {s.value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Radar decorativo */}
-        <div className="hidden lg:block absolute right-8 bottom-10 z-20 opacity-90">
-          <MiniRadar />
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 z-20">
-          <TickerBar />
-        </div>
-      </section>
-
-      {/* ================= HÉROES ================= */}
-      <section id="heroes" className="relative py-24 bg-zinc-950 border-t border-zinc-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <SectionEyebrow accent="cyan">Pool de héroes</SectionEyebrow>
-          <h2
-            className="text-3xl sm:text-5xl font-black text-center text-zinc-50"
-            style={{ fontFamily: "'Orbitron', sans-serif" }}
-          >
-            Héroes de guerra
-          </h2>
-          <p className="text-center text-zinc-500 mt-3 max-w-lg mx-auto text-sm sm:text-base">
-            Toca una carta para ver las habilidades que Franklin domina con
-            cada campeón.
-          </p>
-
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {HERO_MAINS.map((hero) => {
-              const a = ACCENTS[hero.accent];
-              const isOpen = openHero === hero.id;
-              return (
-                <div
-                  key={hero.id}
-                  className={`relative border ${a.border} bg-zinc-900/60 p-6 flex flex-col items-center text-center transition-all hover:-translate-y-1 hover:border-opacity-80`}
-                >
-                  <HexFrame accent={hero.accent} size="lg" className="mb-4">
-                    {/* Reemplaza este bloque por <img src="tu-foto.jpg" className="w-full h-full object-cover" /> */}
-                    <span className="text-xs text-zinc-500 px-4 leading-tight">
-                      <img src={hero.imagen}alt="foto del heroe" />
-                    </span>
-                  </HexFrame>
-
-                  <h3
-                    className={`text-2xl font-black ${a.text}`}
-                    style={{ fontFamily: "'Orbitron', sans-serif" }}
-                  >
-                    {hero.name}
-                  </h3>
-                  <p className="text-xs uppercase tracking-widest text-zinc-500 mt-1">
-                    {hero.role}
-                  </p>
-                  <p className="text-sm text-zinc-400 mt-3">{hero.tagline}</p>
-
-                  <button
-                    onClick={() => setOpenHero(isOpen ? null : hero.id)}
-                    className={`mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-4 py-2 border ${a.border} ${a.text} hover:${a.bgSoft} transition-colors`}
-                  >
-                    {isOpen ? "Ocultar habilidades" : "Ver habilidades"}
-                    <ChevronRight
-                      size={14}
-                      className={`transition-transform ${isOpen ? "rotate-90" : ""}`}
-                    />
-                  </button>
-
-                  <div
-                    className={`grid w-full transition-all duration-300 ease-out ${
-                      isOpen ? "grid-rows-[1fr] opacity-100 mt-5" : "grid-rows-[0fr] opacity-0 mt-0"
-                    }`}
-                    style={{ display: "grid" }}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="flex flex-col gap-3 text-left">
-                        {hero.skills.map((skill) => (
-                          <div key={skill.label} className="flex items-start gap-3">
-                            <div className={`mt-0.5 shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${a.bgSoft} ${a.text}`}>
-                              <skill.icon size={16} />
-                            </div>
-                            <div>
-                              <p className="text-sm font-bold text-zinc-200">
-                                {skill.label}
-                              </p>
-                              <p className="text-xs text-zinc-500">{skill.desc}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= TORNEOS ================= */}
-      <section id="torneos" className="relative py-24 bg-zinc-950 border-t border-zinc-900 overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.06] pointer-events-none hex-pattern" />
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-          <SectionEyebrow accent="red">Historial de combate</SectionEyebrow>
-          <h2
-            className="text-3xl sm:text-5xl font-black text-center text-zinc-50"
-            style={{ fontFamily: "'Orbitron', sans-serif" }}
-          >
-            Torneos
-          </h2>
-
-          {/* Próxima misión */}
-          <div className="mt-10 max-w-2xl mx-auto border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-6 py-6 text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-amber-400 font-bold flex items-center justify-center gap-2">
-              <Radio size={14} className="animate-pulse" /> Próxima misión
-            </p>
-            {countdown.over ? (
-              <p className="mt-3 text-zinc-300 font-bold">
-                ¡La partida está en curso ahora mismo!
-              </p>
-            ) : (
-              <div className="mt-4 flex items-center justify-center gap-2 sm:gap-4">
-                {[
-                  { v: countdown.days, l: "Días" },
-                  { v: countdown.hours, l: "Hrs" },
-                  { v: countdown.minutes, l: "Min" },
-                  { v: countdown.seconds, l: "Seg" },
-                ].map((t) => (
-                  <div
-                    key={t.l}
-                    className="bg-zinc-950 border border-amber-500/30 px-3 sm:px-4 py-2 min-w-[64px]"
-                  >
-                    <p
-                      className="text-2xl sm:text-3xl font-black text-amber-400"
-                      style={{ fontFamily: "'Share Tech Mono', monospace" }}
-                    >
-                      {pad(t.v)}
-                    </p>
-                    <p className="text-[10px] uppercase tracking-widest text-zinc-500">
-                      {t.l}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Tabs */}
-          <div className="mt-12 flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
-            {[
-              { key: "duo", label: "Dúo", icon: Users },
-              { key: "squad", label: "5 vs 5", icon: Shield },
-              { key: "others", label: "Otros", icon: Trophy },
-            ].map((tab) => {
-              const isActive = activeTab === tab.key;
-              return (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold uppercase tracking-wider border transition-colors ${
-                    isActive
-                      ? "bg-red-500 border-red-500 text-zinc-950"
-                      : "border-zinc-700 text-zinc-400 hover:border-red-500/50 hover:text-red-400"
-                  }`}
-                  style={{ clipPath: "polygon(8% 0, 100% 0, 92% 100%, 0 100%)" }}
-                >
-                  <tab.icon size={16} />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Cards */}
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {TOURNAMENTS[activeTab].map((t) => (
-              <div
-                key={t.name}
-                className="border border-zinc-800 bg-zinc-900/60 p-6 hover:border-red-500/40 transition-colors"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-xs uppercase tracking-widest text-zinc-500">
-                      {t.mode}
-                    </p>
-                    <h3 className="text-lg font-black text-zinc-100 mt-1">
-                      {t.name}
-                    </h3>
-                  </div>
-                  <StatusPill status={t.status} />
-                </div>
-
-                <div className="mt-4 grid grid-cols-3 gap-3 text-center">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-zinc-500">Fecha</p>
-                    <p className="text-sm font-bold text-zinc-200 mt-0.5">{t.date}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-zinc-500">Premio</p>
-                    <p className="text-sm font-bold text-amber-400 mt-0.5">{t.prize}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-zinc-500">Resultado</p>
-                    <p className="text-sm font-bold text-zinc-200 mt-0.5">{t.placement}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= EQUIPO ================= */}
-      <section id="equipo" className="relative py-24 bg-zinc-950 border-t border-zinc-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <SectionEyebrow accent="violet">La colmena</SectionEyebrow>
-          <h2
-            className="text-3xl sm:text-5xl font-black text-center text-zinc-50"
-            style={{ fontFamily: "'Orbitron', sans-serif" }}
-          >
-            Escuadrón Scorpio
-          </h2>
-
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-5 gap-5">
-            {ROSTER.map((m) => {
-              const a = ACCENTS[m.accent];
-              return (
-                <div
-                  key={m.name + m.role}
-                  className={`flex flex-col items-center text-center ${
-                    m.lead ? "col-span-2 sm:col-span-1" : ""
-                  }`}
-                >
-                  <HexFrame accent={m.accent} size={m.lead ? "xl" : "md"} className="mb-3">
-                    {/* Reemplaza por <img src="foto.jpg" className="w-full h-full object-cover" /> */}
-                  <img src={m.logo} alt="" />
-                  </HexFrame>
-                  <p className={`font-black ${m.lead ? "text-xl" : "text-sm"} text-zinc-100`}>
-                    {m.name}
-                  </p>
-                  <p className={`text-[11px] uppercase tracking-widest ${a.text}`}>
-                    {m.role}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= CONTACTO ================= */}
-      <section id="contacto" className="relative py-24 bg-zinc-950 border-t border-zinc-900">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <SectionEyebrow accent="amber">Únete al enjambre</SectionEyebrow>
-          <h2
-            className="text-3xl sm:text-5xl font-black text-zinc-50"
-            style={{ fontFamily: "'Orbitron', sans-serif" }}
-          >
-            Contacto
-          </h2>
-          <p className="text-zinc-500 mt-3 text-sm sm:text-base">
-            Sigue a Franklin y a Team Scorpio, o copia el enlace de contacto
-            para invitarlo a tu próximo torneo.
-          </p>
-
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[
-              { key: "ig", label: "Instagram", icon: FaInstagram, value: "instagram.com/teamscorpio" },
-              { key: "yt", label: "YouTube", icon: FaYoutube, value: "youtube.com/@teamscorpio" },
-              { key: "tw", label: "Tiktok", icon: SiTiktok, value: "https://www.tiktok.com/@juanfranklin444" },
-              { key: "dc", label: "Discord", icon: MessageCircle, value: "discord.gg/teamscorpio" },
-            ].map((s) => (
-              <button
-                key={s.key}
-                onClick={() => copyToClipboard(s.value, s.key)}
-                className="flex flex-col items-center gap-2 border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 px-3 py-5 transition-colors"
-              >
-                <s.icon size={20} className="text-zinc-300" />
-                <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">
-                  {s.label}
-                </span>
-                <span className="text-[10px] text-zinc-600 flex items-center gap-1">
-                 
-                <button
-  onClick={() => window.open(s.value, "_blank")}
-  className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-blue-700 transition"
->
-  Ver
-</button>
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-20 border-t border-zinc-900 pt-8 text-center">
-          <p className="text-xs text-zinc-600 tracking-widest uppercase">
-            Team Scorpio © 2026 — Franklin, Jungla Mítica
-          </p>
-        </div>
-      </section>
+      {/* ================= MAIN CONTENT ================= */}
+      {renderSection()}
 
       {/* ================= REPRODUCTOR DE MÚSICA ================= */}
-      {/*
-        Coloca aquí la URL real de tu pista de fondo, por ejemplo:
-        <audio ref={audioRef} loop src="https://tu-servidor.com/tema-scorpio.mp3" />
-        Mientras no exista una fuente real, los controles funcionan
-        pero no habrá audio audible.
-      */}
-      <audio ref={audioRef} loop src="" />
+      <audio ref={audioRef} loop src="/music.mp3" />
 
-      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 bg-zinc-900/90 backdrop-blur-md border border-amber-500/30 px-4 py-3 shadow-lg shadow-black/50">
+      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 bg-zinc-900/90 backdrop-blur-xl border border-amber-500/30 px-4 py-3 shadow-2xl shadow-black/50 rounded-xl">
         <button
           onClick={toggleAudio}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-amber-500 hover:bg-amber-400 text-zinc-950 transition-colors shrink-0"
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-110 transition-transform text-zinc-950 shrink-0"
           aria-label={audioPlaying ? "Pausar música" : "Reproducir música"}
         >
           {audioPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
         </button>
 
-        <div className="hidden sm:block">
-          <audio ref={audioRef} src="/music.mp3" />
-
-    <div
-      onClick={() => audioRef.current.play()}
-      className="hidden sm:block cursor-pointer"
-    >
-      <p className="text-[11px] font-bold text-zinc-200 leading-none">
-        Tema de batalla
-      </p>
-      <p className="text-[10px] text-zinc-500 leading-none mt-1">
-        Team Scorpio · Haz clic para reproducir
-      </p>
-    </div>
+        <div className="hidden sm:block cursor-pointer" onClick={toggleAudio}>
+          <p className="text-[11px] font-bold text-zinc-200 leading-none">
+            <Music className="inline w-3 h-3 mr-1" />
+            Tema de batalla
+          </p>
+          <p className="text-[10px] text-zinc-500 leading-none mt-1">
+            {audioPlaying ? "🔊 Reproduciendo" : "⏸️ Pausado"}
+          </p>
         </div>
 
         <button
@@ -873,7 +1403,7 @@ export default function TeamScorpioFranklin() {
             setVolume(parseFloat(e.target.value));
             if (muted) setMuted(false);
           }}
-          className="w-16 accent-amber-500"
+          className="w-16 accent-amber-500 bg-zinc-800 rounded-lg"
           aria-label="Volumen"
         />
       </div>
@@ -881,22 +1411,22 @@ export default function TeamScorpioFranklin() {
   );
 }
 
-/* -------------------- DECORATIVE PIECES -------------------- */
+// ============================================================
+// DECORATIVE PIECES
+// ============================================================
 
 function BattlefieldBackground({ particles }) {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
-      {/* base gradient: jungla / campo de batalla nocturno */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-emerald-950/60 to-zinc-950" />
-
-      {/* grid HUD */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-emerald-950/30 to-zinc-900" />
       <div className="absolute inset-0 opacity-[0.07] hud-grid" />
+      
+      <div className="absolute -left-1/4 bottom-0 w-[150%] h-64 bg-emerald-900/20 blur-3xl fog-drift" />
+      <div className="absolute -right-1/4 bottom-10 w-[150%] h-56 bg-zinc-800/30 blur-3xl fog-drift" style={{ animationDelay: "3s" }} />
+      
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/5 blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/5 blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
 
-      {/* niebla */}
-      <div className="absolute -left-1/4 bottom-0 w-[150%] h-64 bg-emerald-900/30 blur-3xl fog-drift" />
-      <div className="absolute -right-1/4 bottom-10 w-[150%] h-56 bg-zinc-800/40 blur-3xl fog-drift" style={{ animationDelay: "3s" }} />
-
-      {/* siluetas de jungla */}
       <svg
         className="absolute bottom-0 left-0 w-full h-40 sm:h-56 text-zinc-900"
         viewBox="0 0 1200 200"
@@ -906,45 +1436,59 @@ function BattlefieldBackground({ particles }) {
         <path d="M0,200 L0,120 L60,90 L100,130 L160,60 L210,120 L260,80 L320,140 L380,70 L440,130 L500,90 L560,150 L620,60 L680,130 L740,90 L800,150 L860,70 L920,130 L980,90 L1040,140 L1100,80 L1160,120 L1200,100 L1200,200 Z" />
       </svg>
 
-      {/* escaneo tipo HUD */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="w-full h-1/3 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent scan-sweep" />
+        <div className="w-full h-1/3 bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent scan-sweep" />
       </div>
 
-      {/* partículas flotantes */}
       {particles.map((p, i) => (
         <span
           key={i}
-          className="absolute bottom-0 w-1 h-1 rounded-full bg-amber-400/70 float-particle"
+          className="absolute bottom-0 rounded-full bg-amber-400/60 float-particle"
           style={{
             left: `${p.left}%`,
             animationDelay: `${p.delay}s`,
             animationDuration: `${p.duration}s`,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            opacity: p.opacity,
           }}
         />
       ))}
 
-      {/* viñeta */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.6)_100%)]" />
     </div>
   );
 }
 
 function MiniRadar() {
   return (
-    <div className="relative w-40 h-40 rounded-full border border-emerald-500/30 bg-zinc-950/60 backdrop-blur-sm flex items-center justify-center">
+    <div className="relative w-40 h-40 rounded-full border border-emerald-500/30 bg-zinc-900/60 backdrop-blur-sm flex items-center justify-center shadow-2xl shadow-emerald-500/10">
       <div className="absolute inset-3 rounded-full border border-emerald-500/20" />
       <div className="absolute inset-8 rounded-full border border-emerald-500/20" />
+      <div className="absolute inset-10 rounded-full border border-emerald-500/10" />
+      
       <div
         className="absolute inset-0 rounded-full"
         style={{
-          background:
-            "conic-gradient(from 0deg, rgba(52,211,153,0.35), transparent 40%)",
+          background: "conic-gradient(from 0deg, rgba(52,211,153,0.35), transparent 40%, rgba(52,211,153,0.1))",
           animation: "radar-spin 4s linear infinite",
         }}
       />
-      <span className="absolute w-2 h-2 rounded-full bg-amber-400 glow-pulse" style={{ "--glow-color": "#fbbf24" }} />
+      
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+        <div
+          key={deg}
+          className="absolute w-px h-12 bg-emerald-500/10"
+          style={{ transform: `rotate(${deg}deg)` }}
+        />
+      ))}
+      
+      <span className="absolute w-2 h-2 rounded-full bg-amber-400 glow-pulse" />
       <Crosshair size={16} className="text-emerald-400/60 absolute" />
+      
+      <div className="absolute bottom-2 text-[8px] text-zinc-600 font-mono tracking-wider">
+        SYS:ONLINE
+      </div>
     </div>
   );
 }
@@ -957,10 +1501,12 @@ function TickerBar() {
     "🎯 KDA 7.2",
     "🔥 RACHA DE 12 VICTORIAS",
     "🎮 FRANKLIN — JUNGLA",
+    "⭐ ANIVERSARIO FRANKLIN GAMER",
+    "🎁 TORNEO 5 VS 5 — DICIEMBRE 2026",
   ];
   const doubled = [...items, ...items];
   return (
-    <div className="bg-black/70 border-t border-amber-500/20 overflow-hidden py-2.5">
+    <div className="bg-black/60 border-t border-amber-500/20 overflow-hidden py-2.5">
       <div className="flex whitespace-nowrap animate-marquee">
         {doubled.map((t, i) => (
           <span
@@ -976,7 +1522,9 @@ function TickerBar() {
   );
 }
 
-/* -------------------- GLOBAL STYLE (fuentes + animaciones custom) -------------------- */
+// ============================================================
+// GLOBAL STYLE
+// ============================================================
 
 function GlobalStyle() {
   return (
@@ -984,35 +1532,65 @@ function GlobalStyle() {
       @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 
       @keyframes fade-up {
-        from { opacity: 0; transform: translateY(24px); }
+        from { opacity: 0; transform: translateY(30px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .fade-up { animation: fade-up 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; opacity: 0; }
+
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(-10px); }
         to { opacity: 1; transform: translateY(0); }
       }
-      .fade-up { animation: fade-up 0.9s ease forwards; opacity: 0; }
+      .animate-fade-in { animation: fade-in 0.5s ease forwards; }
+
+      @keyframes scale-in {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+      @keyframes slide-in {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .animate-slide-in { animation: slide-in 0.4s ease forwards; opacity: 0; }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-6px); }
+      }
+      .animate-float { animation: float 3s ease-in-out infinite; }
 
       @keyframes glow-pulse {
-        0%, 100% { box-shadow: 0 0 6px var(--glow-color, #fbbf24), 0 0 2px var(--glow-color, #fbbf24) inset; }
-        50% { box-shadow: 0 0 18px var(--glow-color, #fbbf24), 0 0 5px var(--glow-color, #fbbf24) inset; }
+        0%, 100% { box-shadow: 0 0 6px #fbbf24, 0 0 2px #fbbf24 inset; }
+        50% { box-shadow: 0 0 20px #fbbf24, 0 0 6px #fbbf24 inset; }
       }
       .glow-pulse { animation: glow-pulse 2.2s ease-in-out infinite; }
 
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .animate-spin-slow { animation: spin-slow 6s linear infinite; }
+
       @keyframes fog-drift {
-        0% { transform: translateX(-8%); }
-        50% { transform: translateX(8%); }
-        100% { transform: translateX(-8%); }
+        0% { transform: translateX(-8%) scale(1); }
+        50% { transform: translateX(8%) scale(1.1); }
+        100% { transform: translateX(-8%) scale(1); }
       }
       .fog-drift { animation: fog-drift 14s ease-in-out infinite; }
 
       @keyframes scan-sweep {
-        0% { transform: translateY(-120%); }
-        100% { transform: translateY(220%); }
+        0% { transform: translateY(-120%) rotate(5deg); }
+        100% { transform: translateY(220%) rotate(-5deg); }
       }
       .scan-sweep { animation: scan-sweep 6s linear infinite; }
 
       @keyframes float-particle {
-        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
         10% { opacity: 0.9; }
         90% { opacity: 0.9; }
-        100% { transform: translateY(-90vh) translateX(16px); opacity: 0; }
+        100% { transform: translateY(-90vh) translateX(20px) scale(0); opacity: 0; }
       }
       .float-particle { animation-name: float-particle; animation-timing-function: linear; animation-iteration-count: infinite; }
 
@@ -1027,6 +1605,12 @@ function GlobalStyle() {
         100% { transform: rotate(360deg); }
       }
 
+      @keyframes modal-in {
+        from { opacity: 0; transform: scale(0.95) translateY(20px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+      }
+      .animate-modal-in { animation: modal-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
       .hud-grid {
         background-image:
           linear-gradient(to right, rgba(148,163,184,0.5) 1px, transparent 1px),
@@ -1035,8 +1619,22 @@ function GlobalStyle() {
       }
 
       .hex-pattern {
-        background-image: radial-gradient(circle at 2px 2px, rgba(248,113,113,0.6) 1px, transparent 1px);
+        background-image: radial-gradient(circle at 2px 2px, rgba(248,113,113,0.4) 1px, transparent 1px);
         background-size: 28px 28px;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(24, 24, 27, 0.5);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(52, 211, 153, 0.3);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(52, 211, 153, 0.5);
       }
 
       @media (prefers-reduced-motion: reduce) {
