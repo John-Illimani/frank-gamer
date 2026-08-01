@@ -63,6 +63,7 @@ import {
   Orbit as OrbitIcon,
   Sword,
   Target as TargetIcon,
+  ChevronDown,
 } from "lucide-react";
 
 import {
@@ -213,6 +214,65 @@ const TOURNAMENT = {
 };
 
 const NEXT_MATCH_DATE = new Date("2026-12-15T18:00:00");
+
+// ============================================================
+// TOURNAMENT BRACKET DATA
+// ============================================================
+
+const BRACKET_DATA = [
+  {
+    id: "grupo-a",
+    name: "Grupo A",
+    day: "Sábado",
+    accent: "amber",
+    winners: ["Eternal Kins","Team Scorpio"], // 👈 pon aquí los nombres de los que ganaron, ej: ["Team Scorpio", "Dream Team"]
+    matches: [
+      { time: "7:30 PM", team1: "Eternal Kins", team2: "Dark Dinasty", logo1: "", logo2: "" },
+      { time: "8:00 PM", team1: "Team Scorpio", team2: "Pro Sport", logo1: "/foto.png", logo2: "" },
+      { time: "8:30 PM", team1: "Chain Breakers", team2: "Nelore", logo1: "", logo2: "" },
+      { time: "9:00 PM", team1: "Dream Team", team2: "Hero Silenth", logo1: "", logo2: "" },
+    ],
+  },
+  {
+    id: "grupo-b",
+    name: "Grupo B",
+    day: "Sábado",
+    accent: "cyan",
+    winners: [], // 👈 pon aquí los ganadores de este grupo
+    matches: [
+      { time: "9:30 PM", team1: "Nika Sport", team2: "Proget QT", logo1: "", logo2: "" },
+      { time: "10:00 PM", team1: "Roshidere", team2: "Teem Crumbs", logo1: "", logo2: "" },
+      { time: "10:30 PM", team1: "Trikitakatelas", team2: "Pendejo Sport", logo1: "", logo2: "" },
+      { time: "11:00 PM", team1: "Level One", team2: "Imperium", logo1: "", logo2: "" },
+    ],
+  },
+  {
+    id: "grupo-c",
+    name: "Grupo C",
+    day: "Domingo",
+    accent: "violet",
+    winners: [], // 👈 pon aquí los ganadores de este grupo
+    matches: [
+      { time: "7:30 PM", team1: "Ego Vitaly", team2: "Spearhead", logo1: "", logo2: "" },
+      { time: "8:00 PM", team1: "X Force", team2: "Abusa Frank", logo1: "", logo2: "" },
+      { time: "8:30 PM", team1: "Shador King", team2: "Celestial King", logo1: "", logo2: "" },
+      { time: "9:00 PM", team1: "Tormentados EFM", team2: "Nich Gaming", logo1: "", logo2: "" },
+    ],
+  },
+  {
+    id: "grupo-d",
+    name: "Grupo D",
+    day: "Domingo",
+    accent: "red",
+    winners: [], // 👈 pon aquí los ganadores de este grupo
+    matches: [
+      { time: "9:30 PM", team1: "Team Zodiacal", team2: "VC2", logo1: "", logo2: "" },
+      { time: "10:00 PM", team1: "Toros Negros", team2: "SLG", logo1: "", logo2: "" },
+      { time: "10:30 PM", team1: "Los Cochinotes", team2: "Tuns 1.0", logo1: "", logo2: "" },
+      { time: "11:00 PM", team1: "Los Tuns 2.0", team2: "Legión Kalosky", logo1: "", logo2: "" },
+    ],
+  },
+];
 
 // ============================================================
 // HELPERS
@@ -746,6 +806,347 @@ function SocialModal({ isOpen, onClose }) {
 }
 
 // ============================================================
+// BRACKET MODAL
+// ============================================================
+
+function BracketTeamBox({ name, logo, side = "left", isWinner = false }) {
+  return (
+    <div className={`brk-team ${side === "right" ? "brk-team-r" : ""} ${isWinner ? "brk-team-winner" : ""}`}>
+      {side === "right" && (
+        <span className="brk-team-name">
+          {name}
+          {isWinner && <Check size={12} className="brk-check" />}
+        </span>
+      )}
+      <div className="brk-avatar">
+        {logo ? <img src={logo} alt={name} /> : <Swords size={14} />}
+      </div>
+      {side === "left" && (
+        <span className="brk-team-name">
+          {isWinner && <Check size={12} className="brk-check" />}
+          {name}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function BracketMatchBox({ match, side, winners = [] }) {
+  const winner1 = winners.includes(match.team1);
+  const winner2 = winners.includes(match.team2);
+
+  return (
+    <div className="brk-node">
+      <span className="brk-time">
+        <Clock size={10} /> {match.time}
+      </span>
+      <div className="brk-matchup">
+        <BracketTeamBox name={match.team1} logo={match.logo1} side="left" isWinner={winner1} />
+        <span className="brk-vs">VS</span>
+        <BracketTeamBox name={match.team2} logo={match.logo2} side="right" isWinner={winner2} />
+      </div>
+      {(winner1 || winner2) && (
+        <div className="brk-advance">
+          <Trophy size={10} />
+          Avanza a la siguiente fase
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BracketModal({ isOpen, onClose }) {
+  const [activeGroup, setActiveGroup] = useState("grupo-a");
+
+  if (!isOpen) return null;
+
+  const group = BRACKET_DATA.find((g) => g.id === activeGroup);
+  const a = ACCENTS[group.accent];
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-xl animate-fade-in"
+      onClick={onClose}
+    >
+      <style>{`
+        .brk-panel {
+          position: relative;
+          overflow: hidden;
+          border-radius: 22px;
+        }
+        .brk-wave {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(60px);
+          opacity: 0.35;
+          pointer-events: none;
+        }
+        .brk-wave-1 {
+          width: 420px; height: 420px;
+          top: -120px; left: -100px;
+          background: radial-gradient(circle, #f59e0b 0%, transparent 70%);
+          animation: brk-float-1 12s ease-in-out infinite;
+        }
+        .brk-wave-2 {
+          width: 380px; height: 380px;
+          bottom: -140px; right: -100px;
+          background: radial-gradient(circle, #ef4444 0%, transparent 70%);
+          animation: brk-float-2 15s ease-in-out infinite;
+        }
+        .brk-wave-3 {
+          width: 320px; height: 320px;
+          top: 40%; left: 50%;
+          background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+          animation: brk-float-3 18s ease-in-out infinite;
+        }
+        @keyframes brk-float-1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(60px, 40px) scale(1.15); }
+        }
+        @keyframes brk-float-2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(-50px, -30px) scale(1.2); }
+        }
+        @keyframes brk-float-3 {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.25; }
+          50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.4; }
+        }
+        .brk-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: #f59e0b transparent;
+        }
+        .brk-scroll::-webkit-scrollbar {
+          width: 10px;
+        }
+        .brk-scroll::-webkit-scrollbar-track {
+          background: rgba(24,24,27,0.4);
+          border-radius: 999px;
+          margin: 8px 0;
+        }
+        .brk-scroll::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #fbbf24, #ef4444, #a855f7);
+          border-radius: 999px;
+          border: 2px solid transparent;
+          background-clip: padding-box;
+          box-shadow: 0 0 10px rgba(251,191,36,0.6);
+          animation: brk-thumb-pulse 2.5s ease-in-out infinite;
+        }
+        @keyframes brk-thumb-pulse {
+          0%, 100% { box-shadow: 0 0 6px rgba(251,191,36,0.5); }
+          50% { box-shadow: 0 0 16px rgba(239,68,68,0.7); }
+        }
+
+        .brk-tree {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          align-items: stretch;
+          gap: 0 1.5rem;
+        }
+        .brk-col { display: flex; flex-direction: column; justify-content: center; gap: 1.75rem; position: relative; }
+        .brk-node {
+          background: rgba(24,24,27,0.6);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 14px;
+          padding: 10px 14px;
+          position: relative;
+          transition: border-color 0.3s, transform 0.3s;
+        }
+        .brk-node:hover { border-color: rgba(251,191,36,0.4); transform: translateY(-2px); }
+        .brk-time {
+          display: flex; align-items: center; gap: 4px;
+          font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+          text-transform: uppercase; color: #a1a1aa;
+          font-family: 'Share Tech Mono', monospace;
+          margin-bottom: 6px;
+        }
+        .brk-matchup { display: flex; align-items: center; gap: 8px; }
+        .brk-team { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+        .brk-team-r { flex-direction: row-reverse; }
+        .brk-avatar {
+          width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.1);
+          display: flex; align-items: center; justify-content: center;
+          color: #f59e0b; overflow: hidden;
+        }
+        .brk-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .brk-team-name { font-size: 12px; font-weight: 700; color: #e4e4e7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .brk-team-winner .brk-team-name {
+  color: #34d399;
+  font-weight: 900;
+}
+.brk-check {
+  color: #34d399;
+  flex-shrink: 0;
+  margin: 0 3px;
+}
+.brk-node:has(.brk-team-winner) {
+  border-color: rgba(52,211,153,0.35);
+  background: rgba(16,185,129,0.06);
+}
+.brk-advance {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #34d399;
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.25);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+        .brk-vs { font-size: 9px; font-weight: 900; color: #71717a; flex-shrink: 0; }
+
+        .brk-hub {
+          display: flex; flex-direction: column; align-items: center; justify-content: center;
+          gap: 6px; padding: 18px 14px; min-width: 110px;
+          border-radius: 16px;
+          background: linear-gradient(160deg, rgba(251,191,36,0.15), rgba(24,24,27,0.7));
+          border: 1px solid rgba(251,191,36,0.35);
+          text-align: center;
+        }
+        .brk-hub-title { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: #fbbf24; }
+        .brk-hub-sub { font-size: 9px; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* Conectores estilo bracket */
+        .brk-col-left::before,
+        .brk-col-left::after,
+        .brk-col-right::before,
+        .brk-col-right::after {
+          content: '';
+          position: absolute;
+          background: rgba(251,191,36,0.35);
+        }
+        .brk-col-left::before {
+          right: -0.75rem; top: 25%; bottom: 25%; width: 2px;
+        }
+        .brk-col-left::after {
+          right: -1.5rem; top: 50%; width: 0.75rem; height: 2px;
+        }
+        .brk-col-right::before {
+          left: -0.75rem; top: 25%; bottom: 25%; width: 2px;
+        }
+        .brk-col-right::after {
+          left: -1.5rem; top: 50%; width: 0.75rem; height: 2px;
+        }
+        .brk-node::after { display: none; }
+        .brk-col-left .brk-node::after {
+          content: '';
+          display: block;
+          position: absolute;
+          right: -0.75rem; top: 50%; width: 0.75rem; height: 2px;
+          background: rgba(251,191,36,0.35);
+        }
+        .brk-col-right .brk-node::after {
+          content: '';
+          display: block;
+          position: absolute;
+          left: -0.75rem; top: 50%; width: 0.75rem; height: 2px;
+          background: rgba(251,191,36,0.35);
+        }
+
+        @media (max-width: 860px) {
+          .brk-tree { display: flex; flex-direction: column; gap: 0.9rem; }
+          .brk-col { gap: 0.9rem; }
+          .brk-col-left::before, .brk-col-left::after,
+          .brk-col-right::before, .brk-col-right::after,
+          .brk-col-left .brk-node::after, .brk-col-right .brk-node::after {
+            display: none;
+          }
+          .brk-hub { flex-direction: row; min-width: 0; width: 100%; justify-content: center; }
+        }
+      `}</style>
+
+      <div
+        className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-modal-in brk-scroll"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="brk-panel bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 p-5 sm:p-8 shadow-2xl shadow-red-500/10">
+          <div className="brk-wave brk-wave-1" />
+          <div className="brk-wave brk-wave-2" />
+          <div className="brk-wave brk-wave-3" />
+          <div className="absolute inset-0 opacity-5 hex-pattern" />
+
+          <div className="relative">
+            <div className="flex justify-between items-start mb-1">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-full bg-gradient-to-r from-red-500 to-amber-500 flex items-center justify-center shrink-0">
+                  <Milestone size={20} className="text-zinc-950" />
+                </div>
+                <div>
+                  <h3
+                    className="text-xl sm:text-3xl font-black text-zinc-100"
+                    style={{ fontFamily: "'Orbitron', sans-serif" }}
+                  >
+                    Bracket del torneo
+                  </h3>
+                  <p className="text-red-400 text-xs sm:text-sm">Aniversario Franklin Gamer</p>
+                </div>
+              </div>
+              <button
+                onClick={onClose}
+                className="text-zinc-400 hover:text-zinc-200 transition-all hover:rotate-90 duration-300 p-2 hover:bg-zinc-800/50 rounded-full shrink-0"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            {/* Selector de grupos */}
+            <div className="mt-5 flex flex-wrap gap-2">
+              {BRACKET_DATA.map((g) => {
+                const ga = ACCENTS[g.accent];
+                const isActive = activeGroup === g.id;
+                return (
+                  <button
+                    key={g.id}
+                    onClick={() => setActiveGroup(g.id)}
+                    className={`px-4 py-2 border transition-all duration-300 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider ${
+                      isActive
+                        ? `${ga.bg} ${ga.borderStrong} text-zinc-950 scale-105`
+                        : "bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
+                    }`}
+                  >
+                    {g.name}
+                  </button>
+                );
+              })}
+            </div>
+
+            <p className="mt-3 mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+              <Calendar size={13} className={a.text} />
+              {group.day} · {group.name}
+            </p>
+
+            {/* Árbol del bracket */}
+            <div className="brk-tree">
+              <div className="brk-col brk-col-left">
+                 <BracketMatchBox match={group.matches[0]} side="left" winners={group.winners} />
+  <BracketMatchBox match={group.matches[1]} side="left" winners={group.winners} />
+              </div>
+
+              <div className="brk-hub">
+                <Trophy size={18} className="text-amber-400" />
+                <span className="brk-hub-title">Top 2</span>
+                <span className="brk-hub-sub">Avanzan</span>
+              </div>
+
+              <div className="brk-col brk-col-right">
+                 <BracketMatchBox match={group.matches[2]} side="right" winners={group.winners} />
+  <BracketMatchBox match={group.matches[3]} side="right" winners={group.winners} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
 // SECTION COMPONENTS
 // ============================================================
 
@@ -1021,11 +1422,7 @@ function HeroesSection({ openHero, setOpenHero }) {
   );
 }
 
-function TorneosSection({ countdown, onRegisterClick }) {
-  const scrollToRegistro = () => {
-    document.getElementById("torneos")?.scrollIntoView({ behavior: "smooth" });
-  };
-
+function TorneosSection({ countdown, onRegisterClick, onBracketClick }) {
   return (
     <section id="torneos" className="relative py-24 bg-zinc-900/50 border-t border-zinc-800/50 overflow-hidden">
       <div className="absolute inset-0 opacity-[0.06] hex-pattern" />
@@ -1124,10 +1521,10 @@ function TorneosSection({ countdown, onRegisterClick }) {
                 <Rocket size={18} />
                 Inscribirse
               </GlowButton>
-              <button className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
-                <Copy className="inline w-3 h-3 mr-1" />
-                Compartir torneo
-              </button>
+              <GlowButton accent="amber" onClick={onBracketClick} className="w-full">
+                <ClipboardList size={18} />
+                Ver Cuadro
+              </GlowButton>
             </div>
           </div>
           
@@ -1202,6 +1599,7 @@ export default function TeamScorpioFranklin() {
   const [openHero, setOpenHero] = useState(null);
   const [copiedKey, setCopiedKey] = useState(null);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showBracketModal, setShowBracketModal] = useState(false);
 
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [volume, setVolume] = useState(0.6);
@@ -1271,7 +1669,11 @@ export default function TeamScorpioFranklin() {
       case "inicio":
         return <InicioSection particles={particles} onFollowClick={handleFollowClick} following={following} />;
       case "torneos":
-        return <TorneosSection countdown={countdown} onRegisterClick={() => setShowRegisterModal(true)} />;
+        return <TorneosSection 
+          countdown={countdown} 
+          onRegisterClick={() => setShowRegisterModal(true)}
+          onBracketClick={() => setShowBracketModal(true)}
+        />;
       case "equipo":
         return <EquipoSection />;
       default:
@@ -1286,9 +1688,11 @@ export default function TeamScorpioFranklin() {
       <RegistrationModal 
         isOpen={showRegisterModal} 
         onClose={() => setShowRegisterModal(false)}
-        onSuccess={() => {
-          // Puedes agregar acciones adicionales aquí cuando el registro sea exitoso
-        }}
+        onSuccess={() => {}}
+      />
+      <BracketModal 
+        isOpen={showBracketModal} 
+        onClose={() => setShowBracketModal(false)} 
       />
 
       {/* ================= NAVBAR ================= */}
