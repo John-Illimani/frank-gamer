@@ -251,8 +251,10 @@ const BRACKET_DATA = [
     name: "Grupo C",
     day: "Domingo",
     accent: "violet",
-    winners: [], // 👈 pon aquí los ganadores de este grupo
+    winners: ["Land Stand"], // 👈 pon aquí los ganadores de este grupo
     matches: [
+
+      { time: "7:00 PM", team1: "Land Stand", team2: "Nelore ", logo1: "", logo2: "" },
       { time: "7:30 PM", team1: "Ego Vitaly", team2: "Spearhead", logo1: "", logo2: "" },
       { time: "8:00 PM", team1: "X Force", team2: "Abusa Frank", logo1: "", logo2: "" },
       { time: "8:30 PM", team1: "Shador King", team2: "Celestial King", logo1: "", logo2: "" },
@@ -1112,23 +1114,39 @@ function BracketModal({ isOpen, onClose }) {
             </p>
 
             {/* Árbol del bracket */}
-            <div className="brk-tree">
-              <div className="brk-col brk-col-left">
-                 <BracketMatchBox match={group.matches[0]} side="left" winners={group.winners} />
-  <BracketMatchBox match={group.matches[1]} side="left" winners={group.winners} />
-              </div>
+           <div className="brk-tree">
+  <div className="brk-col brk-col-left">
+    {group.matches
+      .slice(0, Math.ceil(group.matches.length / 2))
+      .map((match, i) => (
+        <BracketMatchBox
+          key={i}
+          match={match}
+          side="left"
+          winners={group.winners}
+        />
+      ))}
+  </div>
 
-              <div className="brk-hub">
-                <Trophy size={18} className="text-amber-400" />
-                <span className="brk-hub-title">Top 2</span>
-                <span className="brk-hub-sub">Avanzan</span>
-              </div>
+  <div className="brk-hub">
+    <Trophy size={18} className="text-amber-400" />
+    <span className="brk-hub-title">Top 2</span>
+    <span className="brk-hub-sub">Avanzan</span>
+  </div>
 
-              <div className="brk-col brk-col-right">
-                 <BracketMatchBox match={group.matches[2]} side="right" winners={group.winners} />
-  <BracketMatchBox match={group.matches[3]} side="right" winners={group.winners} />
-              </div>
-            </div>
+  <div className="brk-col brk-col-right">
+    {group.matches
+      .slice(Math.ceil(group.matches.length / 2))
+      .map((match, i) => (
+        <BracketMatchBox
+          key={i}
+          match={match}
+          side="right"
+          winners={group.winners}
+        />
+      ))}
+  </div>
+</div>
           </div>
         </div>
       </div>
