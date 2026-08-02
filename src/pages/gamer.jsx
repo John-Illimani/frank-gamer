@@ -205,7 +205,7 @@ const TOURNAMENT = {
   name: "Aniversario Franklin Gamer",
   mode: "5 vs 5",
   date: "Agosto 2026",
-  prize: "$1000 + Merch Oficial",
+  prize: "5 pases semanales",
   placement: "¡Inscríbete ahora!",
   status: "upcoming",
   description: "Torneo especial por el aniversario del canal. ¡Premios increíbles y mucha acción!",
@@ -213,7 +213,7 @@ const TOURNAMENT = {
   sponsors: ["Scorpio Gaming", "GamerZone", "Razer", "HyperX"],
 };
 
-const NEXT_MATCH_DATE = new Date("2026-12-15T18:00:00");
+const NEXT_MATCH_DATE = new Date("2026-08-28T18:00:00");
 
 // ============================================================
 // TOURNAMENT BRACKET DATA  holaaaaa 22ssswerwrwer  sdfsdfds
@@ -1430,7 +1430,7 @@ function TorneosSection({ countdown, onRegisterClick, onBracketClick }) {
           </div>
           
           <p className="text-xs uppercase tracking-[0.3em] text-amber-400 font-bold flex items-center justify-center gap-2">
-            <Radio size={14} className="animate-pulse" /> Próxima misión
+            <Radio size={14} className="animate-pulse" /> Próxima misión Cuarta temporada del torneo Franklin
           </p>
           
           {countdown.over ? (
