@@ -1259,7 +1259,7 @@ function InicioSection({ particles, onFollowClick, following }) {
               document.getElementById("torneos")?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            <Trophy size={18} /> Ver Torneos
+            <Trophy size={18} /> ¡¡ LOS MEJORES DE LATAM !!
           </GlowButton>
 
           <button
