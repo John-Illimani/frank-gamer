@@ -204,7 +204,7 @@ const NAV_LINKS = [
 const TOURNAMENT = {
   name: "Aniversario Franklin Gamer",
   mode: "5 vs 5",
-  date: "Diciembre 2026",
+  date: "Agosto 2026",
   prize: "$1000 + Merch Oficial",
   placement: "¡Inscríbete ahora!",
   status: "upcoming",
@@ -238,7 +238,7 @@ const BRACKET_DATA = [
     name: "Grupo B",
     day: "Sábado",
     accent: "cyan",
-    winners: ["Proget QT","Teem Crumbs","Trikitakatelas"], // 👈 pon aquí los ganadores de este grupo
+    winners: ["Proget QT","Teem Crumbs","Trikitakatelas","Level One"], // 👈 pon aquí los ganadores de este grupo
     matches: [
       { time: "9:30 PM", team1: "Nika Sport", team2: "Proget QT", logo1: "", logo2: "" },
       { time: "10:00 PM", team1: "Roshidere", team2: "Teem Crumbs", logo1: "", logo2: "" },
@@ -1896,7 +1896,7 @@ function TickerBar() {
     "🔥 RACHA DE 12 VICTORIAS",
     "🎮 FRANKLIN — JUNGLA",
     "⭐ ANIVERSARIO FRANKLIN GAMER",
-    "🎁 TORNEO 5 VS 5 — DICIEMBRE 2026",
+    "🎁 TORNEO 5 VS 5 — 1 DE AGOSTO 2026",
   ];
   const doubled = [...items, ...items];
   return (
