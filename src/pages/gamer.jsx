@@ -251,7 +251,7 @@ const BRACKET_DATA = [
     name: "Grupo C",
     day: "Domingo",
     accent: "violet",
-    winners: ["Land Stand"], // 👈 pon aquí los ganadores de este grupo
+    winners: ["Land Stand","Spearhead"], // 👈 pon aquí los ganadores de este grupo
     matches: [
 
       { time: "7:00 PM", team1: "Land Stand", team2: "Nelore ", logo1: "", logo2: "" },
