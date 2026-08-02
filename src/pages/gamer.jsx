@@ -811,22 +811,12 @@ function SocialModal({ isOpen, onClose }) {
 
 function BracketTeamBox({ name, logo, side = "left", isWinner = false }) {
   return (
-    <div className={`brk-team ${side === "right" ? "brk-team-r" : ""} ${isWinner ? "brk-team-winner" : ""}`}>
-      {side === "right" && (
-        <span className="brk-team-name">
-          {name}
-          {isWinner && <Check size={12} className="brk-check" />}
-        </span>
-      )}
+    <div className={`brk-team ${side === "right" ? "brk-team-r" : ""} ${isWinner ? "brk-team-winner border-b-2 border-amber-400/60 shadow-[0_4px_12px_-2px_rgba(251,191,36,0.4)] rounded-md " : ""}`}>
       <div className="brk-avatar">
         {logo ? <img src={logo} alt={name} /> : <Swords size={14} />}
       </div>
-      {side === "left" && (
-        <span className="brk-team-name">
-          {isWinner && <Check size={12} className="brk-check" />}
-          {name}
-        </span>
-      )}
+      <span className="brk-team-name ">{name}</span>
+      {isWinner && <Check size={20} className="brk-check" />}
     </div>
   );
 }
