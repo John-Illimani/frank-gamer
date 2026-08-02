@@ -225,7 +225,7 @@ const BRACKET_DATA = [
     name: "Grupo A",
     day: "Sábado",
     accent: "amber",
-    winners: ["Eternal Kins", "Pro Sport", "Chain Breakers"], // 👈 pon aquí los nombres de los que ganaron, ej: ["Team Scorpio", "Dream Team"]
+    winners: ["Eternal Kins", "Pro Sport", "Chain Breakers","Hero Silenth"], // 👈 pon aquí los nombres de los que ganaron, ej: ["Team Scorpio", "Dream Team"]
     matches: [
       { time: "7:30 PM", team1: "Eternal Kins", team2: "Dark Dinasty", logo1: "", logo2: "" },
       { time: "8:00 PM", team1: "Team Scorpio", team2: "Pro Sport", logo1: "/foto.png", logo2: "" },
