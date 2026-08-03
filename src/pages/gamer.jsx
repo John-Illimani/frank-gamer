@@ -195,10 +195,41 @@ const ROSTER = [
   { name: "John", role: "Roamer", accent: "emerald", lead: false, logo: "/dirrot.png" },
 ];
 
+
+const PAREJAS_CONFIRMADAS = [
+  {
+    id: "pareja-1",
+    el: "Chimuelo",
+    ella: "Luminosa",
+    heroEl: "Jungla",
+    heroElla: "Mago",
+    desde: "Desde los inicios del canal",
+    frase: "Ella lo cura, él la protege. Combo perfecto dentro y fuera del mapa.",
+    accent: "red",
+    fotoEl: "/chimuelo.jpg",
+    fotoElla: "/chimuela.jpg",
+  },
+  {
+    id: "pareja-2",
+    el: "Angel",
+    ella: "Diana",
+    heroEl: "Tanque",
+    heroElla: "Mago",
+    desde: "Desde el 2 de agosto 2026",
+    frase: "Pone el corazón por delante para resguardar el de ella.",
+    accent: "violet",
+    fotoEl: "/angel.jpg",
+    fotoElla: "/diana.jpg",
+  },
+  // 👉 agrega más parejas copiando este bloque
+];
+
 const NAV_LINKS = [
   { id: "inicio", label: "Inicio", icon: Home },
   { id: "torneos", label: "Torneos", icon: Trophy },
   { id: "equipo", label: "Equipo", icon: UsersIcon },
+  { id: "parejas", label: "Parejas", icon: Heart },
+{ id: "ganadores", label: "Ganadores", icon: Medal },
 ];
 
 const TOURNAMENT = {
@@ -273,6 +304,116 @@ const BRACKET_DATA = [
       { time: "10:30 PM", team1: "Los Cochinotes", team2: "Tuns 1.0", logo1: "", logo2: "" },
       { time: "11:00 PM", team1: "Los Tuns 2.0", team2: "Legión Kalosky", logo1: "", logo2: "" },
     ],
+  },
+];
+
+const PLAYOFFS_DATA = {
+  cuartos: {
+    label: "Cuartos de Final",
+    accent: "amber",
+    definido: true,
+    groups: [
+      {
+        id: "cuartos-a",
+        name: "Grupo A",
+        day: "Lunes",
+        winners: [], // 👈 pon aquí los ganadores del Grupo A de cuartos
+        matches: [
+          { id: "qf1", time: "7:30 PM", team1: "Spearhead", team2: "Eternal Kins", logo1: "", logo2: "" },
+          { id: "qf2", time: "8:00 PM", team1: "Pro Sport", team2: "X Force", logo1: "", logo2: "" },
+          { id: "qf3", time: "8:30 PM", team1: "Shador King", team2: "Hero Silenth", logo1: "", logo2: "" },
+          { id: "qf4", time: "9:00 PM", team1: "Teem Crumbs", team2: "VC2", logo1: "", logo2: "" },
+        ],
+      },
+      {
+        id: "cuartos-b",
+        name: "Grupo B",
+        day: "Lunes",
+        winners: [], // 👈 pon aquí los ganadores del Grupo B de cuartos
+        matches: [
+          { id: "qf5", time: "9:30 PM", team1: "SLG", team2: "Trikitakatelas", logo1: "", logo2: "" },
+          { id: "qf6", time: "10:00 PM", team1: "Level One", team2: "Tuns 1.0", logo1: "", logo2: "" },
+          { id: "qf7", time: "10:30 PM", team1: "Land Stand", team2: "Los Tuns 2.0", logo1: "", logo2: "" },
+          { id: "qf8", time: "11:00 PM", team1: "Nich Gaming", team2: "Proget QT", logo1: "", logo2: "" },
+        ],
+      },
+    ],
+  },
+  semifinal: {
+    label: "Semifinal",
+    accent: "cyan",
+    definido: false,
+    winners: [],
+    matches: [
+      { id: "sf1", team1: null, team2: null, logo1: "", logo2: "" },
+      { id: "sf2", team1: null, team2: null, logo1: "", logo2: "" },
+    ],
+  },
+  final: {
+    label: "Gran Final",
+    accent: "red",
+    definido: false,
+    winners: [],
+    matches: [
+      { id: "f1", team1: null, team2: null, logo1: "", logo2: "" },
+    ],
+  },
+};
+const TORNEOS_PASADOS = [
+  {
+    etapa: 1,
+    nombre: "Primera Temporada",
+    fecha: "Enero 2026",
+    campeon: "Team Spirit",
+    mvp: "Jungla",
+    accent: "amber",
+    logo: "/1.jpg",
+    copa: "/copa1.jpg",
+    finalizado: true,
+  },
+  {
+    etapa: 2,
+    nombre: "Segunda Temporada",
+    fecha: "Abril 2026",
+    campeon: "Rubiosos",
+    mvp: "Roamer",
+    accent: "cyan",
+    logo: "/2.jpg",
+    copa: "/copa2.jpg",
+    finalizado: true,
+  },
+  {
+    etapa: 3,
+    nombre: "Tercera Temporada",
+    fecha: "Junio 2026",
+    campeon: "Night Gaming",
+    mvp: "Adc",
+    accent: "violet",
+    logo: "/3.jpg",
+    copa: "/copa3.jpg",
+    finalizado: true,
+  },
+  {
+    etapa: "Aniversario",
+    nombre: "Torneo Aniversario",
+    fecha: "Agosto 2026",
+    campeon: null,
+    mvp: null,
+    accent: "red",
+    logo: "",
+    copa: "/copa_aniversario.jpg",
+    finalizado: false,
+  },
+  {
+    etapa: 4,
+    nombre: "Cuarta Temporada",
+    fecha: "Próximamente",
+    campeon: null,
+    mvp: null,
+    accent: "emerald",
+    logo: "",
+    copa: "/copa4.jpg",
+    finalizado: false,
   },
 ];
 
@@ -756,12 +897,10 @@ function SocialModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const socialLinks = [
-    { name: "Instagram", icon: FaInstagram, url: "https://instagram.com/teamscorpio", color: "text-pink-500" },
-    { name: "YouTube", icon: FaYoutube, url: "https://youtube.com/@teamscorpio", color: "text-red-500" },
+    { name: "Instagram", icon: FaInstagram, url: "https://www.instagram.com/juan.franklin.3139?igsh=N3l3NWZtYXd0YXYw", color: "text-pink-500" },
+    { name: "YouTube", icon: FaYoutube, url: "https://youtube.com/@juanfranklin303?si=8NcwZwvp2zclG9t4", color: "text-red-500" },
     { name: "TikTok", icon: FaTiktok, url: "https://www.tiktok.com/@juanfranklin444", color: "text-white" },
-    { name: "Twitch", icon: FaTwitch, url: "https://twitch.tv/teamscorpio", color: "text-purple-500" },
-    { name: "Discord", icon: FaDiscord, url: "https://discord.gg/teamscorpio", color: "text-indigo-400" },
-    { name: "Facebook", icon: FaFacebook, url: "https://facebook.com/teamscorpio", color: "text-blue-500" },
+    { name: "Facebook", icon: FaFacebook, url: "https://www.facebook.com/share/19H4c5V5wR/", color: "text-blue-500" },
   ];
 
   return (
@@ -847,13 +986,109 @@ function BracketMatchBox({ match, side, winners = [] }) {
   );
 }
 
+function PlayoffMatchCard({ match, accent, definido, winners = [] }) {
+  const a = ACCENTS[accent];
+  const team1 = definido ? match.team1 : "Por definir";
+  const team2 = definido ? match.team2 : "Por definir";
+
+  const isWinner1 = definido && winners.includes(match.team1);
+  const isWinner2 = definido && winners.includes(match.team2);
+  const hasWinner = isWinner1 || isWinner2;
+
+  return (
+    <div
+      className={`relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 rounded-2xl p-5 flex flex-col items-center gap-3 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${
+        hasWinner ? "border-emerald-400/40 shadow-[0_4px_16px_-4px_rgba(52,211,153,0.35)]" : ""
+      }`}
+    >
+      <div className="flex items-center justify-center gap-4 w-full">
+        {/* Equipo 1 */}
+        <div
+          className={`flex flex-col items-center gap-2 flex-1 min-w-0 ${
+            isWinner1 ? "border-b-2 border-emerald-400/60 pb-2 rounded-md" : ""
+          }`}
+        >
+          <div className="brk-avatar w-11 h-11 relative">
+            {definido && match.logo1 ? (
+              <img src={match.logo1} alt={team1} />
+            ) : definido ? (
+              <Swords size={16} />
+            ) : (
+              <Clock size={16} className="text-zinc-500" />
+            )}
+          </div>
+          <span
+            className={`text-xs font-bold text-center truncate w-full flex items-center gap-1 justify-center ${
+              isWinner1 ? "text-emerald-400 font-black" : definido ? "text-zinc-100" : "text-zinc-500 italic"
+            }`}
+          >
+            {team1}
+            {isWinner1 && <Check size={14} className="text-emerald-400 shrink-0" />}
+          </span>
+        </div>
+
+        <span className={`text-xs font-black ${a.text} shrink-0`}>VS</span>
+
+        {/* Equipo 2 */}
+        <div
+          className={`flex flex-col items-center gap-2 flex-1 min-w-0 ${
+            isWinner2 ? "border-b-2 border-emerald-400/60 pb-2 rounded-md" : ""
+          }`}
+        >
+          <div className="brk-avatar w-11 h-11">
+            {definido && match.logo2 ? (
+              <img src={match.logo2} alt={team2} />
+            ) : definido ? (
+              <Swords size={16} />
+            ) : (
+              <Clock size={16} className="text-zinc-500" />
+            )}
+          </div>
+          <span
+            className={`text-xs font-bold text-center truncate w-full flex items-center gap-1 justify-center ${
+              isWinner2 ? "text-emerald-400 font-black" : definido ? "text-zinc-100" : "text-zinc-500 italic"
+            }`}
+          >
+            {team2}
+            {isWinner2 && <Check size={14} className="text-emerald-400 shrink-0" />}
+          </span>
+        </div>
+      </div>
+
+      {!definido && (
+        <span
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase border ${a.border} ${a.bgSoft} ${a.text} glow-pulse`}
+        >
+          <Sparkles size={10} />
+          Clasificados por confirmar
+        </span>
+      )}
+
+      {hasWinner && (
+        <div className="brk-advance">
+          <Trophy size={10} />
+          Avanza a la siguiente fase
+        </div>
+      )}
+    </div>
+  );
+}
 function BracketModal({ isOpen, onClose }) {
+  const [activeStage, setActiveStage] = useState("grupos");
   const [activeGroup, setActiveGroup] = useState("grupo-a");
+  const [activeCuartosGroup, setActiveCuartosGroup] = useState("cuartos-a");
 
   if (!isOpen) return null;
 
   const group = BRACKET_DATA.find((g) => g.id === activeGroup);
   const a = ACCENTS[group.accent];
+
+  const STAGES = [
+    { id: "grupos", label: "Fase de Grupos", accent: "amber" },
+    { id: "cuartos", label: "Cuartos de Final", accent: "amber" },
+    { id: "semifinal", label: "Semifinal", accent: "cyan" },
+    { id: "final", label: "Gran Final", accent: "red" },
+  ];
 
   return (
     <div
@@ -907,10 +1142,8 @@ function BracketModal({ isOpen, onClose }) {
           scrollbar-width: thin;
           scrollbar-color: #f59e0b transparent;
         }
-        .brk-scroll::-webkit-scrollbar {
-          width: 10px;
-        }
-        .brk-scroll::-webkit-scrollbar-track {
+        .brk-scroll::-webkit-scrollbar { width: 10px; }
+        .brk-scroll::-wbracketebkit-scrollbar-track {
           background: rgba(24,24,27,0.4);
           border-radius: 999px;
           margin: 8px 0;
@@ -963,34 +1196,27 @@ function BracketModal({ isOpen, onClose }) {
         }
         .brk-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .brk-team-name { font-size: 12px; font-weight: 700; color: #e4e4e7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .brk-team-winner .brk-team-name {
-  color: #34d399;
-  font-weight: 900;
-}
-.brk-check {
-  color: #34d399;
-  flex-shrink: 0;
-  margin: 0 3px;
-}
-.brk-node:has(.brk-team-winner) {
-  border-color: rgba(52,211,153,0.35);
-  background: rgba(16,185,129,0.06);
-}
-.brk-advance {
-  margin-top: 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #34d399;
-  background: rgba(52,211,153,0.1);
-  border: 1px solid rgba(52,211,153,0.25);
-  padding: 2px 8px;
-  border-radius: 999px;
-}
+        .brk-team-winner .brk-team-name { color: #34d399; font-weight: 900; }
+        .brk-check { color: #34d399; flex-shrink: 0; margin: 0 3px; }
+        .brk-node:has(.brk-team-winner) {
+          border-color: rgba(52,211,153,0.35);
+          background: rgba(16,185,129,0.06);
+        }
+        .brk-advance {
+          margin-top: 8px;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 9px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: #34d399;
+          background: rgba(52,211,153,0.1);
+          border: 1px solid rgba(52,211,153,0.25);
+          padding: 2px 8px;
+          border-radius: 999px;
+        }
         .brk-vs { font-size: 9px; font-weight: 900; color: #71717a; flex-shrink: 0; }
 
         .brk-hub {
@@ -1004,39 +1230,22 @@ function BracketModal({ isOpen, onClose }) {
         .brk-hub-title { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: #fbbf24; }
         .brk-hub-sub { font-size: 9px; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.08em; }
 
-        /* Conectores estilo bracket */
-        .brk-col-left::before,
-        .brk-col-left::after,
-        .brk-col-right::before,
-        .brk-col-right::after {
-          content: '';
-          position: absolute;
-          background: rgba(251,191,36,0.35);
+        .brk-col-left::before, .brk-col-left::after,
+        .brk-col-right::before, .brk-col-right::after {
+          content: ''; position: absolute; background: rgba(251,191,36,0.35);
         }
-        .brk-col-left::before {
-          right: -0.75rem; top: 25%; bottom: 25%; width: 2px;
-        }
-        .brk-col-left::after {
-          right: -1.5rem; top: 50%; width: 0.75rem; height: 2px;
-        }
-        .brk-col-right::before {
-          left: -0.75rem; top: 25%; bottom: 25%; width: 2px;
-        }
-        .brk-col-right::after {
-          left: -1.5rem; top: 50%; width: 0.75rem; height: 2px;
-        }
+        .brk-col-left::before { right: -0.75rem; top: 25%; bottom: 25%; width: 2px; }
+        .brk-col-left::after { right: -1.5rem; top: 50%; width: 0.75rem; height: 2px; }
+        .brk-col-right::before { left: -0.75rem; top: 25%; bottom: 25%; width: 2px; }
+        .brk-col-right::after { left: -1.5rem; top: 50%; width: 0.75rem; height: 2px; }
         .brk-node::after { display: none; }
         .brk-col-left .brk-node::after {
-          content: '';
-          display: block;
-          position: absolute;
+          content: ''; display: block; position: absolute;
           right: -0.75rem; top: 50%; width: 0.75rem; height: 2px;
           background: rgba(251,191,36,0.35);
         }
         .brk-col-right .brk-node::after {
-          content: '';
-          display: block;
-          position: absolute;
+          content: ''; display: block; position: absolute;
           left: -0.75rem; top: 50%; width: 0.75rem; height: 2px;
           background: rgba(251,191,36,0.35);
         }
@@ -1050,6 +1259,14 @@ function BracketModal({ isOpen, onClose }) {
             display: none;
           }
           .brk-hub { flex-direction: row; min-width: 0; width: 100%; justify-content: center; }
+        }
+
+        .brk-playoff-grid {
+          display: grid;
+          gap: 1rem;
+        }
+        @media (min-width: 640px) {
+          .brk-playoff-grid-2 { grid-template-columns: repeat(2, 1fr); }
         }
       `}</style>
 
@@ -1087,18 +1304,108 @@ function BracketModal({ isOpen, onClose }) {
               </button>
             </div>
 
-            {/* Selector de grupos */}
+            {/* Selector de FASE */}
             <div className="mt-5 flex flex-wrap gap-2">
-              {BRACKET_DATA.map((g) => {
-                const ga = ACCENTS[g.accent];
-                const isActive = activeGroup === g.id;
+              {STAGES.map((s) => {
+                const sa = ACCENTS[s.accent];
+                const isActive = activeStage === s.id;
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => setActiveStage(s.id)}
+                    className={`px-4 py-2 border transition-all duration-300 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                      isActive
+                        ? `${sa.bg} ${sa.borderStrong} text-zinc-950 scale-105`
+                        : "bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
+                    }`}
+                  >
+                    {s.id === "cuartos" && <Swords size={13} />}
+                    {s.id === "semifinal" && <Flame size={13} />}
+                    {s.id === "final" && <Trophy size={13} />}
+                    {s.id === "grupos" && <UsersIcon size={13} />}
+                    {s.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* ===== FASE DE GRUPOS ===== */}
+            {activeStage === "grupos" && (
+              <>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {BRACKET_DATA.map((g) => {
+                    const ga = ACCENTS[g.accent];
+                    const isActive = activeGroup === g.id;
+                    return (
+                      <button
+                        key={g.id}
+                        onClick={() => setActiveGroup(g.id)}
+                        className={`px-4 py-2 border transition-all duration-300 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider ${
+                          isActive
+                            ? `${ga.bg} ${ga.borderStrong} text-zinc-950 scale-105`
+                            : "bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
+                        }`}
+                      >
+                        {g.name}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <p className="mt-3 mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+                  <Calendar size={13} className={a.text} />
+                  {group.day} · {group.name}
+                </p>
+
+                <div className="brk-tree">
+                  <div className="brk-col brk-col-left">
+                    {group.matches
+                      .slice(0, Math.ceil(group.matches.length / 2))
+                      .map((match, i) => (
+                        <BracketMatchBox key={i} match={match} side="left" winners={group.winners} />
+                      ))}
+                  </div>
+
+                  <div className="brk-hub">
+                    <Trophy size={18} className="text-amber-400" />
+                    <span className="brk-hub-title">Top 2</span>
+                    <span className="brk-hub-sub">Avanzan</span>
+                  </div>
+
+                  <div className="brk-col brk-col-right">
+                    {group.matches
+                      .slice(Math.ceil(group.matches.length / 2))
+                      .map((match, i) => (
+                        <BracketMatchBox key={i} match={match} side="right" winners={group.winners} />
+                      ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeStage !== "grupos" && (
+  <div className="mt-6">
+    {(() => {
+      const stageData = PLAYOFFS_DATA[activeStage];
+      const sa = ACCENTS[stageData.accent];
+
+      // ===== CUARTOS: tiene subgrupos =====
+      if (stageData.groups) {
+        const cg = stageData.groups.find((g) => g.id === activeCuartosGroup) || stageData.groups[0];
+        const ca = ACCENTS[stageData.accent];
+
+        return (
+          <>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {stageData.groups.map((g) => {
+                const isActive = activeCuartosGroup === g.id;
                 return (
                   <button
                     key={g.id}
-                    onClick={() => setActiveGroup(g.id)}
+                    onClick={() => setActiveCuartosGroup(g.id)}
                     className={`px-4 py-2 border transition-all duration-300 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider ${
                       isActive
-                        ? `${ga.bg} ${ga.borderStrong} text-zinc-950 scale-105`
+                        ? `${ca.bg} ${ca.borderStrong} text-zinc-950 scale-105`
                         : "bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
                     }`}
                   >
@@ -1108,45 +1415,70 @@ function BracketModal({ isOpen, onClose }) {
               })}
             </div>
 
-            <p className="mt-3 mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
-              <Calendar size={13} className={a.text} />
-              {group.day} · {group.name}
+            <p className="mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+              <Trophy size={13} className={ca.text} />
+              {cg.day} · {stageData.label} · {cg.name}
             </p>
 
-            {/* Árbol del bracket */}
-           <div className="brk-tree">
-  <div className="brk-col brk-col-left">
-    {group.matches
-      .slice(0, Math.ceil(group.matches.length / 2))
-      .map((match, i) => (
-        <BracketMatchBox
-          key={i}
-          match={match}
-          side="left"
-          winners={group.winners}
-        />
-      ))}
-  </div>
+            <div className="brk-tree">
+              <div className="brk-col brk-col-left">
+                {cg.matches
+                  .slice(0, Math.ceil(cg.matches.length / 2))
+                  .map((match, i) => (
+                    <BracketMatchBox key={i} match={match} side="left" winners={cg.winners} />
+                  ))}
+              </div>
 
-  <div className="brk-hub">
-    <Trophy size={18} className="text-amber-400" />
-    <span className="brk-hub-title">Top 2</span>
-    <span className="brk-hub-sub">Avanzan</span>
-  </div>
+              <div className="brk-hub">
+                <Trophy size={18} className="text-amber-400" />
+                <span className="brk-hub-title">Top 1</span>
+                <span className="brk-hub-sub">Avanza</span>
+              </div>
 
-  <div className="brk-col brk-col-right">
-    {group.matches
-      .slice(Math.ceil(group.matches.length / 2))
-      .map((match, i) => (
-        <BracketMatchBox
-          key={i}
-          match={match}
-          side="right"
-          winners={group.winners}
-        />
-      ))}
+              <div className="brk-col brk-col-right">
+                {cg.matches
+                  .slice(Math.ceil(cg.matches.length / 2))
+                  .map((match, i) => (
+                    <BracketMatchBox key={i} match={match} side="right" winners={cg.winners} />
+                  ))}
+              </div>
+            </div>
+          </>
+        );
+      }
+
+      // ===== SEMIFINAL / FINAL: sin subgrupos =====
+      return (
+        <>
+          <p className="mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+            <Trophy size={13} className={sa.text} />
+            {stageData.label}
+            {!stageData.definido && (
+              <span className={`ml-2 ${sa.text} normal-case tracking-normal font-semibold`}>
+                (equipos aún por confirmar)
+              </span>
+            )}
+          </p>
+          <div
+            className={`brk-playoff-grid ${
+              stageData.matches.length > 1 ? "brk-playoff-grid-2" : ""
+            }`}
+          >
+            {stageData.matches.map((match) => (
+              <PlayoffMatchCard
+                key={match.id}
+                match={match}
+                accent={stageData.accent}
+                definido={stageData.definido}
+                winners={stageData.winners}
+              />
+            ))}
+          </div>
+        </>
+      );
+    })()}
   </div>
-</div>
+)}
           </div>
         </div>
       </div>
@@ -1284,12 +1616,12 @@ function InicioSection({ particles, onFollowClick, following }) {
             onClick={onFollowClick}
             className={`relative inline-flex items-center justify-center gap-2 font-bold px-7 py-3 tracking-wide border-2 transition-all duration-300 hover:scale-105 active:scale-95 rounded-lg ${
               following
-                ? "bg-zinc-100 text-zinc-950 border-zinc-100"
+                ? "bg-transparent text-zinc-100 border-zinc-100 hover:bg-zinc-100 hover:text-zinc-950"
                 : "bg-transparent text-zinc-100 border-zinc-100 hover:bg-zinc-100 hover:text-zinc-950"
             }`}
           >
-            {following ? <Check size={18} /> : <Star size={18} />}
-            {following ? "Siguiendo" : "Seguir"}
+            {following ? <Check size={18} /> : <Check size={18} />}
+            {following ? "Seguir" : "Seguir"}
           </button>
         </div>
 
@@ -1432,9 +1764,22 @@ function HeroesSection({ openHero, setOpenHero }) {
 
 function TorneosSection({ countdown, onRegisterClick, onBracketClick }) {
   return (
-    <section id="torneos" className="relative py-24 bg-zinc-900/50 border-t border-zinc-800/50 overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.06] hex-pattern" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-500/5 to-transparent" />
+    <section id="torneos" className=" relative
+    w-full
+    min-h-screen
+    py-24
+    overflow-hidden
+    border-t border-zinc-800/50
+    bg-[url('/2.png')]
+    bg-cover
+    bg-center
+    bg-no-repeat">
+
+      <div className="absolute inset-0 bg-black/70"></div>
+
+<div className="absolute inset-0 hex-pattern opacity-[0.04]"></div>
+
+<div className="absolute inset-0 bg-gradient-to-b from-black/20 via-red-500/5 to-black/30"></div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         <SectionEyebrow accent="red" icon={Award}>Historial de combate</SectionEyebrow>
@@ -1557,9 +1902,31 @@ function TorneosSection({ countdown, onRegisterClick, onBracketClick }) {
 
 function EquipoSection() {
   return (
-    <section id="equipo" className="relative py-24 bg-zinc-900/50 border-t border-zinc-800/50">
-      <div className="absolute inset-0 opacity-[0.03] hex-pattern" />
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section
+  id="equipo"
+  className="
+    relative
+    py-24
+    border-t border-zinc-800/50
+    overflow-hidden
+    bg-[url('/2.png')]
+    h-screen
+    bg-cover
+    bg-center
+    bg-no-repeat
+  "
+>
+  {/* Fondo oscuro */}
+  <div className="absolute inset-0 bg-black/70" />
+
+  {/* Patrón hexagonal */}
+  <div className="absolute inset-0 hex-pattern opacity-[0.04]" />
+
+  {/* Luz roja sutil */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]" />
+
+  {/* Contenido */}
+  <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <SectionEyebrow accent="violet" icon={ShieldIcon}>La colmena</SectionEyebrow>
         <SectionTitle accent="violet" subtitle="El equipo que domina el campo de batalla">
           Escuadrón Scorpio
@@ -1595,6 +1962,237 @@ function EquipoSection() {
   );
 }
 
+
+function ParejasSection() {
+  return (
+    <section
+  id="parejas"
+  className="
+    relative
+    py-24
+    overflow-hidden
+    border-t border-zinc-800/50
+    bg-[url('/2.png')]
+    h-screen
+    bg-cover
+    bg-center
+    bg-no-repeat
+  "
+>
+  {/* Fondo oscuro */}
+  <div className="absolute inset-0 bg-black/70" />
+
+  {/* Patrón hexagonal */}
+  <div className="absolute inset-0 hex-pattern opacity-[0.04]" />
+
+  {/* Iluminación roja */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]" />
+
+  {/* Degradado vertical */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+        <SectionEyebrow accent="red" icon={Heart}>Amor gamer</SectionEyebrow>
+        <SectionTitle accent="red" subtitle="Las parejas confirmadas del canal, unidas dentro y fuera del Land of Dawn">
+          Parejas Confirmadas
+        </SectionTitle>
+
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {PAREJAS_CONFIRMADAS.map((p) => {
+            const a = ACCENTS[p.accent];
+            return (
+              <div
+                key={p.id}
+                className={`relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 p-6 rounded-2xl flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-500`}
+              >
+                <div className="flex items-center justify-center gap-3">
+                  <HexFrame accent={p.accent} size="md" animated>
+                    <img src={p.fotoEl} alt={p.el} className="w-full h-full object-cover rounded-full" />
+                  </HexFrame>
+                  <Heart className={`${a.text} animate-pulse`} size={26} fill="currentColor" />
+                  <HexFrame accent={p.accent} size="md" animated>
+                    <img src={p.fotoElla} alt={p.ella} className="w-full h-full object-cover rounded-full" />
+                  </HexFrame>
+                </div>
+
+                <h3 className="mt-4 text-xl font-black text-zinc-100" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                  {p.el} <span className={a.text}>&</span> {p.ella}
+                </h3>
+                <p className="text-xs uppercase tracking-widest text-zinc-500 mt-1">
+                  {p.heroEl} <Swords className="inline w-3 h-3 mx-1" /> {p.heroElla}
+                </p>
+                <p className={`text-[11px] uppercase tracking-widest ${a.text} mt-2`}>{p.desde}</p>
+                <p className="text-sm text-zinc-400 mt-3">{p.frase}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+function GanadoresSection() {
+  return (
+    <section id="ganadores" className="relative
+    py-24
+    overflow-hidden
+    border-t border-zinc-800/50
+    bg-[url('/2.png')]
+    bg-cover
+    bg-center
+    bg-no-repeat">
+      <style>{`
+  @keyframes copa-entrada-y-flote {
+    0% { transform: scale(0.3) rotate(-15deg) translateY(0); opacity: 0; }
+    45% { transform: scale(1.15) rotate(6deg) translateY(0); opacity: 1; }
+    65% { transform: scale(0.95) rotate(-3deg) translateY(0); opacity: 1; }
+    80% { transform: scale(1) rotate(0deg) translateY(0); opacity: 1; }
+    90% { transform: scale(1) rotate(0deg) translateY(-10px); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg) translateY(0); opacity: 1; }
+  }
+  .copa-pop {
+    opacity: 0;
+    animation: copa-entrada-y-flote 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+               copa-float-loop 2.4s ease-in-out 0.9s infinite;
+  }
+
+  @keyframes copa-float-loop {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.05); }
+  }
+
+  @keyframes copa-glow-ring {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.75; transform: scale(1.25); }
+  }
+  .copa-glow-ring { animation: copa-glow-ring 2.4s ease-in-out infinite; }
+
+  @keyframes card-rise {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card-rise { animation: card-rise 0.7s cubic-bezier(0.4,0,0.2,1) forwards; opacity: 0; }
+
+  .ganador-card:hover .copa-hover-scale {
+    transform: scale(1.18) translateY(-6px) rotate(-4deg);
+  }
+  .copa-hover-scale {
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+`}</style>
+
+     {/* Fondo */}
+  <div className="absolute inset-0 bg-black/70" />
+
+  {/* Patrón */}
+  <div className="absolute inset-0 hex-pattern opacity-[0.04]" />
+
+  {/* Iluminación roja */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]" />
+
+  {/* Degradado */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+      
+      <div className=" relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+        <SectionEyebrow accent="amber" icon={Medal}>Salón de la fama</SectionEyebrow>
+        <SectionTitle accent="amber" subtitle="Copas, campeones y las próximas batallas del Torneo Franklin">
+          Ganadores Anteriores
+        </SectionTitle>
+
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {TORNEOS_PASADOS.map((t, index) => {
+            const a = ACCENTS[t.accent];
+            return (
+              <div
+                key={t.etapa}
+                className={`ganador-card card-rise relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 p-6 rounded-2xl text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 overflow-hidden`}
+                style={{ animationDelay: `${index * 120}ms` }}
+              >
+                {/* glow de fondo */}
+                <div
+                  className="absolute inset-0 opacity-20 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at 50% 20%, ${a.glow} 0%, transparent 60%)`,
+                  }}
+                />
+
+                <div className="relative">
+                  <p className="text-xs uppercase tracking-widest text-zinc-500">{t.fecha}</p>
+                  <h3
+                    className={`text-xl font-black ${a.text} mt-1`}
+                    style={{ fontFamily: "'Orbitron', sans-serif" }}
+                  >
+                    {t.nombre}
+                  </h3>
+
+                  {/* COPA con animación fuerte */}
+                  <div className="relative mt-6 flex items-center justify-center h-28">
+                    <div
+                      className={`copa-glow-ring absolute w-24 h-24 rounded-full ${a.bg} blur-2xl`}
+                    />
+                    <div
+                      className="copa-pop  copa-hover-scale relative z-10"
+                      style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+                    >
+                      {t.copa ? (
+  <img
+    src={t.copa}
+    alt={`Copa ${t.nombre}`}
+    className="rounded-2xl  w-20 h-20  drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+    onError={(e) => {
+      console.error("❌ No se pudo cargar:", t.copa);
+      e.target.style.border = "2px solid red"; // para verlo visualmente
+    }}
+    onLoad={() => console.log("✅ Cargó bien:", t.copa)}
+  />
+) : (
+  <Trophy className={a.text} size={64} />
+)}
+                    </div>
+                  </div>
+
+                  {t.finalizado ? (
+                    <div className="mt-2 flex flex-col items-center gap-2">
+                      <div className="flex items-center gap-2">
+                        <HexFrame accent={t.accent} size="sm" animated>
+                          {t.logo ? (
+                            <img src={t.logo} alt={t.campeon} className="w-full h-full object-cover rounded-full" />
+                          ) : (
+                            <Crown className={a.text} size={18} />
+                          )}
+                        </HexFrame>
+                        <p className="font-black text-zinc-100 text-lg">{t.campeon}</p>
+                      </div>
+                      <p className="text-[10px] uppercase tracking-widest text-amber-400">Campeón</p>
+
+                      <div className="mt-3 pt-3 border-t border-zinc-800/50 w-full text-sm text-zinc-400">
+                        <p>🌟 MVP: <span className="text-zinc-200 font-bold">{t.mvp}</span></p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mt-2 flex flex-col items-center gap-2">
+                      <span
+                        className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold tracking-wider uppercase border ${a.border} ${a.bgSoft} ${a.text} glow-pulse`}
+                      >
+                        <Sparkles size={12} />
+                        Aún sin campeón
+                      </span>
+                      <p className="text-sm text-zinc-400 mt-2">
+                        La copa espera a quien la levante 🏆
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 // ============================================================
 // MAIN COMPONENT
 // ============================================================
@@ -1684,6 +2282,10 @@ export default function TeamScorpioFranklin() {
         />;
       case "equipo":
         return <EquipoSection />;
+      case "parejas":
+        return <ParejasSection />;
+      case "ganadores":
+         return <GanadoresSection />;
       default:
         return <InicioSection particles={particles} onFollowClick={handleFollowClick} following={following} />;
     }
@@ -1787,15 +2389,7 @@ export default function TeamScorpioFranklin() {
           {audioPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
         </button>
 
-        <div className="hidden sm:block cursor-pointer" onClick={toggleAudio}>
-          <p className="text-[11px] font-bold text-zinc-200 leading-none">
-            <Music className="inline w-3 h-3 mr-1" />
-            Tema de batalla
-          </p>
-          <p className="text-[10px] text-zinc-500 leading-none mt-1">
-            {audioPlaying ? "🔊 Reproduciendo" : "⏸️ Pausado"}
-          </p>
-        </div>
+        
 
         <button
           onClick={() => setMuted((v) => !v)}
@@ -1805,19 +2399,7 @@ export default function TeamScorpioFranklin() {
           {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
         </button>
 
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={muted ? 0 : volume}
-          onChange={(e) => {
-            setVolume(parseFloat(e.target.value));
-            if (muted) setMuted(false);
-          }}
-          className="w-16 accent-amber-500 bg-zinc-800 rounded-lg"
-          aria-label="Volumen"
-        />
+        
       </div>
     </div>
   );
