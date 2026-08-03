@@ -317,7 +317,7 @@ const PLAYOFFS_DATA = {
         id: "cuartos-a",
         name: "Grupo A",
         day: "Lunes",
-        winners: [], // 👈 pon aquí los ganadores del Grupo A de cuartos
+        winners: [], 
         matches: [
           { id: "qf1", time: "7:30 PM", team1: "Spearhead", team2: "Eternal Kins", logo1: "", logo2: "" },
           { id: "qf2", time: "8:00 PM", team1: "Pro Sport", team2: "X Force", logo1: "", logo2: "" },
@@ -329,12 +329,14 @@ const PLAYOFFS_DATA = {
         id: "cuartos-b",
         name: "Grupo B",
         day: "Lunes",
-        winners: [], // 👈 pon aquí los ganadores del Grupo B de cuartos
+        winners: [], 
         matches: [
-          { id: "qf5", time: "9:30 PM", team1: "SLG", team2: "Trikitakatelas", logo1: "", logo2: "" },
+         
+          { id: "qf5", time: "9:30 PM", team1: "SLG", team2: "Proget QT", logo1: "", logo2: "" },
           { id: "qf6", time: "10:00 PM", team1: "Level One", team2: "Tuns 1.0", logo1: "", logo2: "" },
           { id: "qf7", time: "10:30 PM", team1: "Land Stand", team2: "Los Tuns 2.0", logo1: "", logo2: "" },
-          { id: "qf8", time: "11:00 PM", team1: "Nich Gaming", team2: "Proget QT", logo1: "", logo2: "" },
+          { id: "qf8", time: "11:00 PM", team1: "Nich Gaming", team2: "Trikitakatelas", logo1: "", logo2: "" },
+          { id: "qf8", time: "Martes", team1: "Chain Break", team2: "Mejor Perdedor", logo1: "", logo2: "" },
         ],
       },
     ],
