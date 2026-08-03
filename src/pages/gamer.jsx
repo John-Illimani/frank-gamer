@@ -266,7 +266,7 @@ const BRACKET_DATA = [
     name: "Grupo D",
     day: "Domingo",
     accent: "red",
-    winners: [], // 👈 pon aquí los ganadores de este grupo
+    winners: ["VC2"], // 👈 pon aquí los ganadores de este grupo
     matches: [
       { time: "9:30 PM", team1: "Team Zodiacal", team2: "VC2", logo1: "", logo2: "" },
       { time: "10:00 PM", team1: "Toros Negros", team2: "SLG", logo1: "", logo2: "" },
