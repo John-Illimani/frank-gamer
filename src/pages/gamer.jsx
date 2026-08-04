@@ -336,7 +336,7 @@ const PLAYOFFS_DATA = {
           { id: "qf6", time: "10:00 PM", team1: "Level One", team2: "Tuns 1.0", logo1: "", logo2: "" },
           { id: "qf7", time: "10:30 PM", team1: "Land Stand", team2: "Los Tuns 2.0", logo1: "", logo2: "" },
           { id: "qf8", time: "11:00 PM", team1: "Nich Gaming", team2: "Trikitakatelas", logo1: "", logo2: "" },
-          { id: "qf8", time: "Martes", team1: "Chain Break", team2: "Mejor Perdedor", logo1: "", logo2: "" },
+          { id: "qf8", time: "Martes 7:30 PM", team1: "Chain Break", team2: "Los Tuns 2.0", logo1: "", logo2: "" },
         ],
       },
     ],
