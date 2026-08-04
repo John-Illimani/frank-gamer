@@ -347,7 +347,7 @@ const PLAYOFFS_DATA = {
     definido: false,
     winners: [],
     matches: [
-      { id: "sf1", team1: null, team2: null, logo1: "", logo2: "" },
+      { id: "sf1", team1: "Eternal Kins", team2: null, logo1: "", logo2: "" },
       { id: "sf2", team1: null, team2: null, logo1: "", logo2: "" },
     ],
   },
