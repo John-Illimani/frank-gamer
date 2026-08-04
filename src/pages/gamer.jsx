@@ -495,7 +495,7 @@ function StatusPill({ status }) {
           isDone ? "bg-emerald-400" : "bg-amber-400"
         }`}
       />
-      {isDone ? "Completado" : "Próximo"}
+      {isDone ? "upcoming" : "upcoming"}
     </span>
   );
 }
