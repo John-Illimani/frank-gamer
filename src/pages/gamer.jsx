@@ -329,7 +329,7 @@ const PLAYOFFS_DATA = {
         id: "cuartos-b",
         name: "Grupo B",
         day: "Lunes",
-        winners: ["SLG","Level One","Land Stand"], 
+        winners: ["SLG","Level One","Land Stand","Nich Gaming"], 
         matches: [
          
           { id: "qf5", time: "9:30 PM", team1: "SLG", team2: "Proget QT", logo1: "", logo2: "" },
@@ -347,8 +347,10 @@ const PLAYOFFS_DATA = {
     definido: true,
     winners: [],
     matches: [
-      { id: "sf1", team1: "Eternal Kins", team2: null, logo1: "", logo2: "" },
-      { id: "sf2", team1: null, team2: null, logo1: "", logo2: "" },
+      { id: "sf1", team1: "VC2", team2: "Hero Silenth", logo1: "", logo2: "" },
+      { id: "sf2", team1: "Pro Sport", team2: "LEVEL ONE", logo1: "", logo2: "" },
+      { id: "sf2", team1: "Nich Gaming", team2: "Eternal Kins", logo1: "", logo2: "" },
+      { id: "sf2", team1: "Land Stand", team2: "SLG", logo1: "", logo2: "" },
     ],
   },
   final: {
