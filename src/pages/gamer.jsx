@@ -344,7 +344,7 @@ const PLAYOFFS_DATA = {
   semifinal: {
     label: "Semifinal",
     accent: "cyan",
-    definido: false,
+    definido: true,
     winners: [],
     matches: [
       { id: "sf1", team1: "Eternal Kins", team2: null, logo1: "", logo2: "" },
