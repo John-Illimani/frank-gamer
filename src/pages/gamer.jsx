@@ -317,7 +317,7 @@ const PLAYOFFS_DATA = {
         id: "cuartos-a",
         name: "Grupo A",
         day: "Lunes",
-        winners: ["Eternal Kins","Pro Sport"], 
+        winners: ["Eternal Kins","Pro Sport","Hero Silenth"], 
         matches: [
           { id: "qf1", time: "7:30 PM", team1: "Spearhead", team2: "Eternal Kins", logo1: "", logo2: "" },
           { id: "qf2", time: "8:00 PM", team1: "Pro Sport", team2: "X Force", logo1: "", logo2: "" },
