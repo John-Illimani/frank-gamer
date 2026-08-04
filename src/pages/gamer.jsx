@@ -347,10 +347,10 @@ const PLAYOFFS_DATA = {
     definido: true,
     winners: [],
     matches: [
-      { id: "sf1", team1: "VC2", team2: "Hero Silenth", logo1: "", logo2: "" },
-      { id: "sf2", team1: "Pro Sport", team2: "LEVEL ONE", logo1: "", logo2: "" },
-      { id: "sf2", team1: "Nich Gaming", team2: "Eternal Kins", logo1: "", logo2: "" },
-      { id: "sf2", team1: "Land Stand", team2: "SLG", logo1: "", logo2: "" },
+      { id: "sf1",time: "8:00 PM", team1: "VC2", team2: "Hero Silenth", logo1: "", logo2: "" },
+      { id: "sf2", time: "8:30 PM", team1: "Pro Sport", team2: "LEVEL ONE", logo1: "", logo2: "" },
+      { id: "sf2", time: "9:00 PM", team1: "Nich Gaming", team2: "Eternal Kins", logo1: "", logo2: "" },
+      { id: "sf2", time: "9:30 PM", team1: "Land Stand", team2: "SLG", logo1: "", logo2: "" },
     ],
   },
   final: {
@@ -1077,6 +1077,10 @@ function PlayoffMatchCard({ match, accent, definido, winners = [] }) {
     </div>
   );
 }
+
+
+  
+
 function BracketModal({ isOpen, onClose }) {
   const [activeStage, setActiveStage] = useState("grupos");
   const [activeGroup, setActiveGroup] = useState("grupo-a");
@@ -1335,7 +1339,7 @@ function BracketModal({ isOpen, onClose }) {
 
             {/* ===== FASE DE GRUPOS ===== */}
             {activeStage === "grupos" && (
-              <>
+              <div key="stage-grupos">
                 <div className="mt-5 flex flex-wrap gap-2">
                   {BRACKET_DATA.map((g) => {
                     const ga = ACCENTS[g.accent];
@@ -1361,12 +1365,18 @@ function BracketModal({ isOpen, onClose }) {
                   {group.day} · {group.name}
                 </p>
 
-                <div className="brk-tree">
+                {/* key en el árbol para forzar remount limpio al cambiar de grupo */}
+                <div className="brk-tree" key={activeGroup}>
                   <div className="brk-col brk-col-left">
                     {group.matches
                       .slice(0, Math.ceil(group.matches.length / 2))
                       .map((match, i) => (
-                        <BracketMatchBox key={i} match={match} side="left" winners={group.winners} />
+                        <BracketMatchBox
+                          key={`${activeGroup}-l-${match.id ?? i}`}
+                          match={match}
+                          side="left"
+                          winners={group.winners}
+                        />
                       ))}
                   </div>
 
@@ -1380,109 +1390,193 @@ function BracketModal({ isOpen, onClose }) {
                     {group.matches
                       .slice(Math.ceil(group.matches.length / 2))
                       .map((match, i) => (
-                        <BracketMatchBox key={i} match={match} side="right" winners={group.winners} />
+                        <BracketMatchBox
+                          key={`${activeGroup}-r-${match.id ?? i}`}
+                          match={match}
+                          side="right"
+                          winners={group.winners}
+                        />
                       ))}
                   </div>
                 </div>
-              </>
+              </div>
             )}
 
+            {/* ===== CUARTOS / SEMIFINAL / FINAL ===== */}
             {activeStage !== "grupos" && (
-  <div className="mt-6">
-    {(() => {
-      const stageData = PLAYOFFS_DATA[activeStage];
-      const sa = ACCENTS[stageData.accent];
+              // 👇 LA CLAVE DEL FIX: key={activeStage} obliga a React a desmontar
+              // por completo el bloque anterior (cuartos vs semi/final tienen
+              // estructuras distintas) en vez de intentar "parchear" el DOM,
+              // que es lo que causaba las filas y botones acumulándose.
+              <div className="mt-6" key={`stage-${activeStage}`}>
+                {(() => {
+                  const stageData = PLAYOFFS_DATA[activeStage];
+                  const sa = ACCENTS[stageData.accent];
 
-      // ===== CUARTOS: tiene subgrupos =====
-      if (stageData.groups) {
-        const cg = stageData.groups.find((g) => g.id === activeCuartosGroup) || stageData.groups[0];
-        const ca = ACCENTS[stageData.accent];
+                  // ===== CUARTOS: tiene subgrupos =====
+                  if (stageData.groups) {
+                    const cg =
+                      stageData.groups.find((g) => g.id === activeCuartosGroup) ||
+                      stageData.groups[0];
+                    const ca = ACCENTS[stageData.accent];
 
-        return (
-          <>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {stageData.groups.map((g) => {
-                const isActive = activeCuartosGroup === g.id;
-                return (
-                  <button
-                    key={g.id}
-                    onClick={() => setActiveCuartosGroup(g.id)}
-                    className={`px-4 py-2 border transition-all duration-300 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider ${
-                      isActive
-                        ? `${ca.bg} ${ca.borderStrong} text-zinc-950 scale-105`
-                        : "bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
-                    }`}
-                  >
-                    {g.name}
-                  </button>
-                );
-              })}
-            </div>
+                    return (
+                      // key={activeCuartosGroup} evita el mismo problema al
+                      // saltar entre Cuartos A / B / C
+                      <div key={activeCuartosGroup}>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {stageData.groups.map((g) => {
+                            const isActive = activeCuartosGroup === g.id;
+                            return (
+                              <button
+                                key={g.id}
+                                onClick={() => setActiveCuartosGroup(g.id)}
+                                className={`px-4 py-2 border transition-all duration-300 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider ${
+                                  isActive
+                                    ? `${ca.bg} ${ca.borderStrong} text-zinc-950 scale-105`
+                                    : "bg-zinc-900/80 border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-zinc-200"
+                                }`}
+                              >
+                                {g.name}
+                              </button>
+                            );
+                          })}
+                        </div>
 
-            <p className="mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
-              <Trophy size={13} className={ca.text} />
-              {cg.day} · {stageData.label} · {cg.name}
-            </p>
+                        <p className="mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+                          <Trophy size={13} className={ca.text} />
+                          {cg.day} · {stageData.label} · {cg.name}
+                        </p>
 
-            <div className="brk-tree">
-              <div className="brk-col brk-col-left">
-                {cg.matches
-                  .slice(0, Math.ceil(cg.matches.length / 2))
-                  .map((match, i) => (
-                    <BracketMatchBox key={i} match={match} side="left" winners={cg.winners} />
-                  ))}
+                        <div className="brk-tree">
+                          <div className="brk-col brk-col-left">
+                            {cg.matches
+                              .slice(0, Math.ceil(cg.matches.length / 2))
+                              .map((match, i) => (
+                                <BracketMatchBox
+                                  key={`${cg.id}-l-${match.id ?? i}`}
+                                  match={match}
+                                  side="left"
+                                  winners={cg.winners}
+                                />
+                              ))}
+                          </div>
+
+                          <div className="brk-hub">
+                            <Trophy size={18} className="text-amber-400" />
+                            <span className="brk-hub-title">Top 1</span>
+                            <span className="brk-hub-sub">Avanza</span>
+                          </div>
+
+                          <div className="brk-col brk-col-right">
+                            {cg.matches
+                              .slice(Math.ceil(cg.matches.length / 2))
+                              .map((match, i) => (
+                                <BracketMatchBox
+                                  key={`${cg.id}-r-${match.id ?? i}`}
+                                  match={match}
+                                  side="right"
+                                  winners={cg.winners}
+                                />
+                              ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  // ===== SEMIFINAL / FINAL: mismo estilo que Cuartos =====
+                  const matches = stageData.matches;
+                  const isSingleMatch = matches.length <= 1;
+                  const hubLabel = activeStage === "final" ? "Campeón" : "Avanza";
+
+                  if (isSingleMatch) {
+                    // Gran Final con un solo partido: nodo centrado + hub arriba
+                    return (
+                      <div className="flex flex-col items-center gap-3">
+                        <div className="brk-hub" style={{ minWidth: 160 }}>
+                          <Trophy size={20} className={sa.text} />
+                          <span className="brk-hub-title">{stageData.label}</span>
+                          <span className="brk-hub-sub">{hubLabel}</span>
+                        </div>
+
+                        {matches.map((match) => (
+                          <div key={match.id ?? `${activeStage}-0`} className="w-full max-w-sm">
+                            {(match.day || match.time) && (
+                              <p className="mb-2 text-[11px] uppercase tracking-widest text-zinc-500 flex items-center justify-center gap-2">
+                                <Calendar size={12} className={sa.text} />
+                                {match.day}
+                                {match.day && match.time && " · "}
+                                {match.time}
+                              </p>
+                            )}
+                            <BracketMatchBox
+                              match={match}
+                              side="left"
+                              winners={stageData.winners}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  }
+
+                  // Semifinal (u otra fase) con 2+ partidos: mismo árbol que Cuartos
+                  return (
+                    <>
+                      <p className="mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+                        <Trophy size={13} className={sa.text} />
+                        {stageData.label}
+                      </p>
+
+                      <div className="brk-tree">
+                        <div className="brk-col brk-col-left">
+                          {matches
+                            .slice(0, Math.ceil(matches.length / 2))
+                            .map((match, i) => (
+                              <div key={match.id ?? `${activeStage}-l-${i}`}>
+                                {(match.day || match.time) && (
+                                  <p className="mb-1 text-[10px] uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+                                    <Calendar size={11} className={sa.text} />
+                                    {match.day}
+                                    {match.day && match.time && " · "}
+                                    {match.time}
+                                  </p>
+                                )}
+                                <BracketMatchBox match={match} side="left" winners={stageData.winners} />
+                              </div>
+                            ))}
+                        </div>
+
+                        <div className="brk-hub">
+                          <Trophy size={18} className={sa.text} />
+                          <span className="brk-hub-title">{stageData.label}</span>
+                          <span className="brk-hub-sub">{hubLabel}</span>
+                        </div>
+
+                        <div className="brk-col brk-col-right">
+                          {matches
+                            .slice(Math.ceil(matches.length / 2))
+                            .map((match, i) => (
+                              <div key={match.id ?? `${activeStage}-r-${i}`}>
+                                {(match.day || match.time) && (
+                                  <p className="mb-1 text-[10px] uppercase tracking-widest text-zinc-500 flex items-center gap-2">
+                                    <Calendar size={11} className={sa.text} />
+                                    {match.day}
+                                    {match.day && match.time && " · "}
+                                    {match.time}
+                                  </p>
+                                )}
+                                <BracketMatchBox match={match} side="right" winners={stageData.winners} />
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
-
-              <div className="brk-hub">
-                <Trophy size={18} className="text-amber-400" />
-                <span className="brk-hub-title">Top 1</span>
-                <span className="brk-hub-sub">Avanza</span>
-              </div>
-
-              <div className="brk-col brk-col-right">
-                {cg.matches
-                  .slice(Math.ceil(cg.matches.length / 2))
-                  .map((match, i) => (
-                    <BracketMatchBox key={i} match={match} side="right" winners={cg.winners} />
-                  ))}
-              </div>
-            </div>
-          </>
-        );
-      }
-
-      // ===== SEMIFINAL / FINAL: sin subgrupos =====
-      return (
-        <>
-          <p className="mb-5 text-xs uppercase tracking-widest text-zinc-500 flex items-center gap-2">
-            <Trophy size={13} className={sa.text} />
-            {stageData.label}
-            {!stageData.definido && (
-              <span className={`ml-2 ${sa.text} normal-case tracking-normal font-semibold`}>
-                (equipos aún por confirmar)
-              </span>
             )}
-          </p>
-          <div
-            className={`brk-playoff-grid ${
-              stageData.matches.length > 1 ? "brk-playoff-grid-2" : ""
-            }`}
-          >
-            {stageData.matches.map((match) => (
-              <PlayoffMatchCard
-                key={match.id}
-                match={match}
-                accent={stageData.accent}
-                definido={stageData.definido}
-                winners={stageData.winners}
-              />
-            ))}
-          </div>
-        </>
-      );
-    })()}
-  </div>
-)}
           </div>
         </div>
       </div>
