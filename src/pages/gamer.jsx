@@ -2064,56 +2064,67 @@ function EquipoSection() {
 function ParejasSection() {
   return (
     <section
-  id="parejas"
-  className="
-    relative
-    py-24
-    overflow-hidden
-    border-t border-zinc-800/50
-    bg-[url('/2.png')]
-    h-screen
-    bg-cover
-    bg-center
-    bg-no-repeat
-  "
->
-  {/* Fondo oscuro */}
-  <div className="absolute inset-0 bg-black/70" />
+      id="parejas"
+      className="
+        relative
+        py-20 sm:py-24
+        border-t border-zinc-800/50
+        min-h-screen
+      "
+    >
+      {/* Contenedor de fondo: aquí sí va overflow-hidden, aislado del contenido */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="
+            absolute inset-0
+            bg-[url('/2.png')]
+            bg-cover bg-center bg-no-repeat
+          "
+        />
+        {/* Fondo oscuro */}
+        <div className="absolute inset-0 bg-black/70" />
 
-  {/* Patrón hexagonal */}
-  <div className="absolute inset-0 hex-pattern opacity-[0.04]" />
+        {/* Patrón hexagonal */}
+        <div className="absolute inset-0 hex-pattern opacity-[0.04]" />
 
-  {/* Iluminación roja */}
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]" />
+        {/* Iluminación roja */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]" />
 
-  {/* Degradado vertical */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+        {/* Degradado vertical */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+      </div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         <SectionEyebrow accent="red" icon={Heart}>Amor gamer</SectionEyebrow>
-        <SectionTitle accent="red" subtitle="Las parejas confirmadas del canal, unidas dentro y fuera del Land of Dawn">
+        <SectionTitle
+          accent="red"
+          subtitle="Las parejas confirmadas del canal, unidas dentro y fuera del Land of Dawn"
+        >
           Parejas Confirmadas
         </SectionTitle>
 
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
           {PAREJAS_CONFIRMADAS.map((p) => {
             const a = ACCENTS[p.accent];
             return (
               <div
                 key={p.id}
-                className={`relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 p-6 rounded-2xl flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-500`}
+                className={`relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 p-5 sm:p-6 rounded-2xl flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-500`}
               >
                 <div className="flex items-center justify-center gap-3">
                   <HexFrame accent={p.accent} size="md" animated>
                     <img src={p.fotoEl} alt={p.el} className="w-full h-full object-cover rounded-full" />
                   </HexFrame>
-                  <Heart className={`${a.text} animate-pulse`} size={26} fill="currentColor" />
+                  <Heart className={`${a.text} animate-pulse shrink-0`} size={26} fill="currentColor" />
                   <HexFrame accent={p.accent} size="md" animated>
                     <img src={p.fotoElla} alt={p.ella} className="w-full h-full object-cover rounded-full" />
                   </HexFrame>
                 </div>
 
-                <h3 className="mt-4 text-xl font-black text-zinc-100" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                <h3
+                  className="mt-4 text-lg sm:text-xl font-black text-zinc-100"
+                  style={{ fontFamily: "'Orbitron', sans-serif" }}
+                >
                   {p.el} <span className={a.text}>&</span> {p.ella}
                 </h3>
                 <p className="text-xs uppercase tracking-widest text-zinc-500 mt-1">
@@ -2130,82 +2141,89 @@ function ParejasSection() {
   );
 }
 
-
 function GanadoresSection() {
   return (
-    <section id="ganadores" className="relative
-    py-24
-    overflow-hidden
-    border-t border-zinc-800/50
-    bg-[url('/2.png')]
-    bg-cover
-    bg-center
-    bg-no-repeat">
+    <section
+      id="ganadores"
+      className="relative py-20 sm:py-24 border-t border-zinc-800/50 overflow-hidden"
+    >
       <style>{`
-  @keyframes copa-entrada-y-flote {
-    0% { transform: scale(0.3) rotate(-15deg) translateY(0); opacity: 0; }
-    45% { transform: scale(1.15) rotate(6deg) translateY(0); opacity: 1; }
-    65% { transform: scale(0.95) rotate(-3deg) translateY(0); opacity: 1; }
-    80% { transform: scale(1) rotate(0deg) translateY(0); opacity: 1; }
-    90% { transform: scale(1) rotate(0deg) translateY(-10px); opacity: 1; }
-    100% { transform: scale(1) rotate(0deg) translateY(0); opacity: 1; }
-  }
-  .copa-pop {
-    opacity: 0;
-    animation: copa-entrada-y-flote 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-               copa-float-loop 2.4s ease-in-out 0.9s infinite;
-  }
+        @keyframes copa-entrada-y-flote {
+          0% { transform: scale(0.3) rotate(-15deg) translateY(0); opacity: 0; }
+          45% { transform: scale(1.15) rotate(6deg) translateY(0); opacity: 1; }
+          65% { transform: scale(0.95) rotate(-3deg) translateY(0); opacity: 1; }
+          80% { transform: scale(1) rotate(0deg) translateY(0); opacity: 1; }
+          90% { transform: scale(1) rotate(0deg) translateY(-10px); opacity: 1; }
+          100% { transform: scale(1) rotate(0deg) translateY(0); opacity: 1; }
+        }
+        .copa-pop {
+          opacity: 0;
+          animation: copa-entrada-y-flote 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                     copa-float-loop 2.4s ease-in-out 0.9s infinite;
+        }
 
-  @keyframes copa-float-loop {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.05); }
-  }
+        @keyframes copa-float-loop {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-10px) scale(1.05); }
+        }
 
-  @keyframes copa-glow-ring {
-    0%, 100% { opacity: 0.35; transform: scale(1); }
-    50% { opacity: 0.75; transform: scale(1.25); }
-  }
-  .copa-glow-ring { animation: copa-glow-ring 2.4s ease-in-out infinite; }
+        @keyframes copa-glow-ring {
+          0%, 100% { opacity: 0.35; transform: scale(1); }
+          50% { opacity: 0.75; transform: scale(1.25); }
+        }
+        .copa-glow-ring { animation: copa-glow-ring 2.4s ease-in-out infinite; }
 
-  @keyframes card-rise {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .card-rise { animation: card-rise 0.7s cubic-bezier(0.4,0,0.2,1) forwards; opacity: 0; }
+        @keyframes card-rise {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .card-rise { animation: card-rise 0.7s cubic-bezier(0.4,0,0.2,1) forwards; opacity: 0; }
 
-  .ganador-card:hover .copa-hover-scale {
-    transform: scale(1.18) translateY(-6px) rotate(-4deg);
-  }
-  .copa-hover-scale {
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-`}</style>
+        .ganador-card:hover .copa-hover-scale {
+          transform: scale(1.18) translateY(-6px) rotate(-4deg);
+        }
+        .copa-hover-scale {
+          transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+      `}</style>
 
-     {/* Fondo */}
-  <div className="absolute inset-0 bg-black/70" />
+      {/* Contenedor de fondo aislado: la imagen se mantiene fija/proporcional
+          sin importar cuánto crezca la sección en mobile */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="
+            absolute inset-0
+            bg-[url('/2.png')]
+            bg-cover bg-center bg-no-repeat
+            md:bg-fixed
+          "
+        />
+        {/* Fondo oscuro */}
+        <div className="absolute inset-0 bg-black/70" />
 
-  {/* Patrón */}
-  <div className="absolute inset-0 hex-pattern opacity-[0.04]" />
+        {/* Patrón */}
+        <div className="absolute inset-0 hex-pattern opacity-[0.04]" />
 
-  {/* Iluminación roja */}
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]" />
+        {/* Iluminación roja */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.08),transparent_70%)]" />
 
-  {/* Degradado */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
-      
-      <div className=" relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Degradado */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <SectionEyebrow accent="amber" icon={Medal}>Salón de la fama</SectionEyebrow>
         <SectionTitle accent="amber" subtitle="Copas, campeones y las próximas batallas del Torneo Franklin">
           Ganadores Anteriores
         </SectionTitle>
 
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
           {TORNEOS_PASADOS.map((t, index) => {
             const a = ACCENTS[t.accent];
             return (
               <div
                 key={t.etapa}
-                className={`ganador-card card-rise relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 p-6 rounded-2xl text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 overflow-hidden`}
+                className={`ganador-card card-rise relative border ${a.border} bg-gradient-to-br ${a.from} to-zinc-900/90 p-5 sm:p-6 rounded-2xl text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 overflow-hidden`}
                 style={{ animationDelay: `${index * 120}ms` }}
               >
                 {/* glow de fondo */}
@@ -2231,23 +2249,23 @@ function GanadoresSection() {
                       className={`copa-glow-ring absolute w-24 h-24 rounded-full ${a.bg} blur-2xl`}
                     />
                     <div
-                      className="copa-pop  copa-hover-scale relative z-10"
+                      className="copa-pop copa-hover-scale relative z-10"
                       style={{ animationDelay: `${0.2 + index * 0.15}s` }}
                     >
                       {t.copa ? (
-  <img
-    src={t.copa}
-    alt={`Copa ${t.nombre}`}
-    className="rounded-2xl  w-20 h-20  drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
-    onError={(e) => {
-      console.error("❌ No se pudo cargar:", t.copa);
-      e.target.style.border = "2px solid red"; // para verlo visualmente
-    }}
-    onLoad={() => console.log("✅ Cargó bien:", t.copa)}
-  />
-) : (
-  <Trophy className={a.text} size={64} />
-)}
+                        <img
+                          src={t.copa}
+                          alt={`Copa ${t.nombre}`}
+                          className="rounded-2xl w-20 h-20 drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                          onError={(e) => {
+                            console.error("❌ No se pudo cargar:", t.copa);
+                            e.target.style.border = "2px solid red";
+                          }}
+                          onLoad={() => console.log("✅ Cargó bien:", t.copa)}
+                        />
+                      ) : (
+                        <Trophy className={a.text} size={64} />
+                      )}
                     </div>
                   </div>
 
@@ -2329,6 +2347,53 @@ export default function TeamScorpioFranklin() {
       audioRef.current.volume = muted ? 0 : volume;
     }
   }, [volume, muted]);
+
+  useEffect(() => {
+  const audio = audioRef.current;
+  if (!audio) return;
+
+  let started = false;
+
+  const tryPlay = () => {
+    audio
+      .play()
+      .then(() => {
+        started = true;
+        setAudioPlaying(true);
+      })
+      .catch(() => {
+        // El navegador bloqueó el autoplay con sonido; esperamos interacción
+        started = false;
+      });
+  };
+
+  // 1) Intento inmediato al cargar
+  tryPlay();
+
+  // 2) Si fue bloqueado, arrancar en la primera interacción del usuario
+  const startOnInteraction = () => {
+    if (!started) {
+      tryPlay();
+    }
+    // Ya cumplió su propósito, se remueven los listeners
+    window.removeEventListener("click", startOnInteraction);
+    window.removeEventListener("touchstart", startOnInteraction);
+    window.removeEventListener("keydown", startOnInteraction);
+    window.removeEventListener("scroll", startOnInteraction);
+  };
+
+  window.addEventListener("click", startOnInteraction);
+  window.addEventListener("touchstart", startOnInteraction);
+  window.addEventListener("keydown", startOnInteraction);
+  window.addEventListener("scroll", startOnInteraction, { passive: true });
+
+  return () => {
+    window.removeEventListener("click", startOnInteraction);
+    window.removeEventListener("touchstart", startOnInteraction);
+    window.removeEventListener("keydown", startOnInteraction);
+    window.removeEventListener("scroll", startOnInteraction);
+  };
+}, []);
 
   const navigateTo = (section) => {
     setMenuOpen(false);
@@ -2476,29 +2541,19 @@ export default function TeamScorpioFranklin() {
       {renderSection()}
 
       {/* ================= REPRODUCTOR DE MÚSICA ================= */}
-      <audio ref={audioRef} loop src="/music.mp3" />
+     <audio ref={audioRef} loop autoPlay src="/music.mp3" />
 
-      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 bg-zinc-900/90 backdrop-blur-xl border border-amber-500/30 px-4 py-3 shadow-2xl shadow-black/50 rounded-xl">
-        <button
-          onClick={toggleAudio}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-110 transition-transform text-zinc-950 shrink-0"
-          aria-label={audioPlaying ? "Pausar música" : "Reproducir música"}
-        >
-          {audioPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
-        </button>
+<div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 bg-zinc-900/90 backdrop-blur-xl border border-amber-500/30 px-4 py-3 shadow-2xl shadow-black/50 rounded-xl">
+  <button
+    onClick={toggleAudio}
+    className="w-5 h-5 flex items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-orange-600 hover:scale-110 transition-transform text-zinc-950 shrink-0"
+    aria-label={audioPlaying ? "Pausar música" : "Reproducir música"}
+  >
+    {audioPlaying ? <Pause size={14} /> : <Play size={18} className="ml-0.5" />}
+  </button>
 
-        
-
-        <button
-          onClick={() => setMuted((v) => !v)}
-          className="text-zinc-400 hover:text-amber-400 transition-colors"
-          aria-label={muted ? "Activar sonido" : "Silenciar"}
-        >
-          {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-        </button>
-
-        
-      </div>
+ 
+</div>
     </div>
   );
 }
