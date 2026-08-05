@@ -221,6 +221,18 @@ const PAREJAS_CONFIRMADAS = [
     fotoEl: "/angel.jpg",
     fotoElla: "/diana.jpg",
   },
+  {
+    id: "pareja-3",
+    el: "Rusio",
+    ella: "Fanny",
+    heroEl: "Jungla",
+    heroElla: "Mago",
+    desde: "Desde el 4 de agosto 2026",
+    frase: "Él abre el camino en la jungla, ella ilumina la batalla con su magia.",
+    accent: "violet",
+    fotoEl: "/rusio.jpg",
+    fotoElla: "/fany.jpg",
+  },
   // 👉 agrega más parejas copiando este bloque
 ];
 
@@ -345,7 +357,7 @@ const PLAYOFFS_DATA = {
     label: "Semifinal",
     accent: "cyan",
     definido: true,
-    winners: [],
+    winners: ["Hero Silenth","LEVEL ONE","Nich Gaming","Land Stand"],
     matches: [
       { id: "sf1",time: "8:00 PM", team1: "VC2", team2: "Hero Silenth", logo1: "", logo2: "" },
       { id: "sf2", time: "8:30 PM", team1: "Pro Sport", team2: "LEVEL ONE", logo1: "", logo2: "" },
@@ -359,7 +371,9 @@ const PLAYOFFS_DATA = {
     definido: false,
     winners: [],
     matches: [
-      { id: "f1", team1: null, team2: null, logo1: "", logo2: "" },
+      { id: "f1", team1: "Hero Silenth", team2: "Land Stand", logo1: "", logo2: "" },
+      { id: "f1", team1: "LEVEL ONE", team2: "Nich Gaming", logo1: "", logo2: "" },
+      { id: "f1", team1: "VC2", team2: "Eternal Kings", logo1: "", logo2: "" },
     ],
   },
 };
