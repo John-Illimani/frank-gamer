@@ -223,7 +223,7 @@ const PAREJAS_CONFIRMADAS = [
   },
   {
     id: "pareja-3",
-    el: "Rusio",
+    el: "Raul",
     ella: "Fanny",
     heroEl: "Jungla",
     heroElla: "Mago",
