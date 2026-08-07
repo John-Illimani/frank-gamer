@@ -225,10 +225,10 @@ const PAREJAS_CONFIRMADAS = [
     id: "pareja-3",
     el: "Raul",
     ella: "Fanny",
-    heroEl: "Jungla",
-    heroElla: "Mago",
+    heroEl: "Roamer",
+    heroElla: "Jungla",
     desde: "Desde el 4 de agosto 2026",
-    frase: "Él abre el camino en la jungla, ella ilumina la batalla con su magia.",
+    frase: "Él protege cada paso como roamer, ella conquista la jungla para llevarlos a la victoria.",
     accent: "violet",
     fotoEl: "/rusio.jpg",
     fotoElla: "/fany.jpg",
@@ -996,6 +996,7 @@ function BracketMatchBox({ match, side, winners = [] }) {
       {(winner1 || winner2) && (
         <div className="brk-advance">
           <Trophy size={10} />
+          
           Avanza a la siguiente fase
         </div>
       )}
