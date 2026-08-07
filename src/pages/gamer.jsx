@@ -369,11 +369,10 @@ const PLAYOFFS_DATA = {
     label: "Gran Final",
     accent: "red",
     definido: false,
-    winners: [],
+    winners: ["Hero Silenth"],
     matches: [
-      { id: "f1", team1: "Hero Silenth", team2: "Land Stand", logo1: "", logo2: "" },
-      { id: "f1", team1: "LEVEL ONE", team2: "Nich Gaming", logo1: "", logo2: "" },
-      { id: "f1", team1: "VC2", team2: "Eternal Kings", logo1: "", logo2: "" },
+      
+      { id: "Final", team1: "Hero Silenth", team2: "VC2", logo1: "", logo2: "" },
     ],
   },
 };
@@ -415,12 +414,12 @@ const TORNEOS_PASADOS = [
     etapa: "Aniversario",
     nombre: "Torneo Aniversario",
     fecha: "Agosto 2026",
-    campeon: null,
-    mvp: null,
+    campeon: "Hero Silenth",
+    mvp: "RAUL",
     accent: "red",
-    logo: "",
+    logo: "/hero.jpg",
     copa: "/copa_aniversario.jpg",
-    finalizado: false,
+    finalizado: true,
   },
   {
     etapa: 4,
