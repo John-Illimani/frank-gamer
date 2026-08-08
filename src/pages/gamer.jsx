@@ -1659,9 +1659,18 @@ function InicioSection({ particles, onFollowClick, following }) {
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <ParallaxBackground className="bg-[url('/6.jpg')]">
-        <BattlefieldBackground particles={particles} />
-      </ParallaxBackground>
+      <ParallaxBackground>
+  <video
+    className="absolute inset-0 w-full h-full object-cover"
+    src="/video_fondo.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+  />
+
+  <BattlefieldBackground particles={particles} />
+</ParallaxBackground>
 
       <div
         className="absolute inset-0 z-10 pointer-events-none"
